@@ -63,31 +63,6 @@ function show2hide(id,modes){
 		a.style.display=="none";
 	}
 }
-/**function esecode_send(mail,buttonid){
-	if(mail==null && mail=="") return;
-	if(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(mail)==false) return;
-	var btn=$(buttonid);
-	btn.disabled=true;
-	var esecode = newXmlHttp();
-	esecode.onreadystatechange = function(){
-		if(esecode.readyState==4 && esecode.status == 200){
-			if(esecode.responseText=="OK"){
-				setTimeout(function(){
-					btn.disabled=false;
-				},50000);
-			}else{
-				btn.value="发送邮箱验证码（发送失败，请重试）";
-				setTimeout(function(){
-					btn.value="发送邮箱验证码";
-					btn.disabled=false;
-				},2000);
-			}
-		}
-	}
-	esecode.open('post',"functions.php");
-	esecode.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	esecode.send("action=esecode_send&mail="+mail);
-}**/
 function picerr(ele){
 	ele.src=IMGDIR+"picture_error.png";
 	ele.onerror=null;
@@ -244,59 +219,6 @@ function replaceAll_(v1,v2,v3){
 	var regexp=new RegExp(v1,"g");
 	return v3.replace(regexp,v2);
 }
-/**function loadjsORcss(file,type,callback){
-	if($(file)!=null){
-		alert(typeof APlayer);
-		callback();
-		return;
-	}
-	type=in_array(type,Array("js","css"))?type:"js";
-	if(type=='js'){
-		var jsObj=document.createElement('script');
-		jsObj.setAttribute('type','text/javascript');
-		jsObj.setAttribute('id',file);
-		jsObj.setAttribute('src',file);
-		document.getElementsByTagName("head")[0].appendChild(jsObj);
-		jsObj.onload=jsObj.onreadystatechange=function(){
-			if(!this.readyState || this.readyState=='complete' || this.readyState=='loaded' ){
-				callback();
-			}
-		}
-	}else if(type=='css'){
-		var cssObj=document.createElement('link');
-		cssObj.setAttribute('type','text/css');
-		cssObj.setAttribute('rel','stylesheet');
-		cssObj.setAttribute('href',file);
-		cssObj.setAttribute('id',file);
-		document.getElementsByTagName("head")[0].appendChild(cssObj);
-		cssObj.onload=cssObj.onreadystatechange=function(){
-			if(!this.readyState || this.readyState=='complete' || this.readyState=='loaded' ){
-				callback();
-			}
-		}
-	}
-}**/
-/**var loadedjs=Array();
-function loadjs(js){
-	if(in_array(js,loadedjs)) return;
-	var jsObj=document.createElement('script');
-	jsObj.setAttribute('type','text/javascript');
-	//jsObj.setAttribute('id',js);
-	jsObj.setAttribute('src',js);
-	document.getElementsByTagName("body")[0].appendChild(jsObj);
-	loadedjs.push(js);
-}
-var loadedcss=Array();
-function loadcss(css){
-	if(in_array(css,loadedcss)) return;
-		var cssObj=document.createElement('link');
-		cssObj.setAttribute('type','text/css');
-		cssObj.setAttribute('rel','stylesheet');
-		cssObj.setAttribute('href',css);
-		//cssObj.setAttribute('id',file);
-		document.getElementsByTagName("head")[0].appendChild(cssObj);
-		loadedcss.push(css);
-}**/
 var classcodes =[];
 window.Import={
     LoadFileList:function(_files,succes){

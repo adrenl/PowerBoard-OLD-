@@ -4,11 +4,13 @@
 	{eval $EDITOR['minimode']=isset($EDITOR['minimode'])?$EDITOR['minimode']:0;}
 	{eval $EDITOR['useattachment']=isset($EDITOR['useattachment'])?$EDITOR['useattachment']:1;}
 	{eval $EDITOR['content']=isset($EDITOR['content'])?$EDITOR['content']:'';}
+	{eval $EDITOR['attachmentlist']=isset($EDITOR['attachmentlist'])?$EDITOR['attachmentlist']:null;}
 	<script>
 		var e_minlength={$EDITOR['minlength']};
 		var e_maxlength={$EDITOR['maxlength']};
 		var e_minimode={$EDITOR['minimode']};
 		var e_useattachment={$EDITOR['useattachment']};
+		var e_original_attach={out $EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"};
 	</script>
 	<link rel="stylesheet" type="text/css" href="{css editor}">
 	<div id="editor_toolbar">
@@ -48,7 +50,7 @@
 	</fieldset>
 	{if $EDITOR['useattachment']}
 	<fieldset id="attachment_fieldset" style="display:none;">
-		<legend>{la e_attachment}</legend>
+		<legend>{la attachment}</legend>
 		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span>
 		<!--<div id="attachmentdiv">
 			
@@ -65,6 +67,7 @@
 	{/if}
 	<textarea id="editor_textarea" name="editor_textarea">{$EDITOR['content']}</textarea>
 	<textarea id="editor_data" name="editor_content" style="display:none;"></textarea>
+	<input type="hidden" name="editor_useattachment" id="editor_useattachment" value="">
 	<div id="editor_bottombar">
 		<a href="{BADLINK}" onclick="savedata()">{la e_savedata}</a>(<input type="checkbox" id="autosave" onclick="autosavecheck();" checked>{la e_auto})
 		<a href="{BADLINK}" onclick="loaddata()">{la e_loaddata}</a>

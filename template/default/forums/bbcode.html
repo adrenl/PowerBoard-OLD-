@@ -46,9 +46,9 @@ function tpl_bb_attachment($data){
 	$size=sizecount($data['size']);
 	$isimg=$data['isimg'];
 	$aid=$data['aid'];
-	$addother=$isimg?'<br><img data-src="forums.php?mod=ajaxupload&action=imgview&aid='.$data['aid'].'" class="lazyload">':'';
+	$add=!$aid?'{la attachment_noexists}':'{la attachment}:<br><a href="forums.php?mod=ajaxupload&action=download&aid='.$aid.'">'.$name.'</a>'.($isimg?'<br><img data-src="forums.php?mod=ajaxupload&action=imgview&aid='.$aid.'" class="lazyload">':'');
 {/eval}
-{block return}<div class="attachment"> {la attachment}: <br><a href="forums.php?mod=ajaxupload&action=download&aid=$aid">$name</a> $size $addother</div> {/block}
+{block return}<div class="attachment">$add</div> {/block}
 {eval}
 	return $return;
 }

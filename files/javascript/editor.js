@@ -11,7 +11,7 @@ var Fonts=new Array("宋体","新宋体","黑体","仿宋","楷体","微软雅�
 var smload=false;
 var timer=0;
 var Colors=new Array('#000000','#800000','#008000','#000080','#800080','#008080','#808080','#C0C0C0','#FF0000','#00FF00','#FFFF00','#0000FF','#FF00FF','#00FFFF','#FFC0CB','#D9D919','#4F4F2F','#856363','#215E21','#FF6EC7','#CC3299','#A67D3D','#CD7F32','#32CD99','#FF7F00','#38B0DE','#EBC79E','#FFFFFF');
-var useattachment=Array();
+var useattachment=new Array();
 
 window.onload=function(){
 	var FontE=$('FontSet');
@@ -53,7 +53,7 @@ function code(type,arg){
 	}else if(type=='u'){
 		dialog('<input type="text" id="v1">','confirm','输入添加下划线的文本',function(){insert('[u]'+$('v1').value+'[/u]');});
 	}else if(type=='d'){
-		dialog('<input type="text" id="v1">','confirm','输入添加删除线的文本',function(){insert('[d]'+$('v1').value+'[/d]');});
+		dialog('<input type="text" id="v1">','confirm','输入添加删除线的文本',function(){insert('[s]'+$('v1').value+'[/s]');});
 	}else if(type=='tc'){
 		clr=$('ColorSet').value;
 		if(clr=='') return;
@@ -153,6 +153,12 @@ function code(type,arg){
 	}else if(type=='attachment'){
 		if(e_useattachment==0) return;
 		switchdisplay("attachment_fieldset");
+		if(e_original_attach!=null){
+			for(var key in e_original_attach){
+				insert_to_attach_table(key,e_original_attach[key]);
+			}
+			e_original_attach=null;
+		}
 	}else if(type=='sup'){
 		dialog('<input type="text" id="v1">','confirm','输入上标文本',function(){insert('[sup]'+$('v1').value+'[/sup]');});
 	}else if(type=='sub'){
@@ -233,35 +239,40 @@ function tominimode(mode){
 		$("BackColortSet").style.display="inline-block";
 	}
 }
-function attachmentinput(){
+function insert_to_attach_table(c1,c2,c3){
 	if(e_useattachment==0) return;
-	var willupload=$('newinsert');
+	var table=$("attachmentlist");
 	var newcell1id='ATTACHMENT1_'+Math.random();
-	var newcell2id='ATTACHMENT1_'+Math.random();
-	var newcell3id='ATTACHMENT1_'+Math.random();
-	var newid='ATTACHMENT_TIPS_'+Math.random();
-	var af=$("attachment_fieldset");
-	var at=$("attachmentlist");
-	var newrow=at.insertRow();
+	var newcell2id='ATTACHMENT2_'+Math.random();
+	var newcell3id='ATTACHMENT3_'+Math.random();
+	var newrow=table.insertRow();
 	var newcell1=newrow.insertCell();
 	var newcell2=newrow.insertCell();
 	var newcell3=newrow.insertCell();
 	newcell1.id=newcell1id;
 	newcell2.id=newcell2id;
 	newcell3.id=newcell3id;
-	newcell2.innerHTML=getFileName(willupload.value)
-	newcell3.innerHTML="即将上传";
+	newcell1.innerHTML=c1;
+	newcell2.innerHTML=c2;
+	newcell3.innerHTML=c3?c3:"<input type='button' value='插入' onclick='insert(\"[attach]"+c1+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+c3+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>";
+	return [newcell1id,newcell2id,newcell3id];
+}
+function attachmentinput(){
+	if(e_useattachment==0) return;
+	var willupload=$('newinsert');
 	var uploadajax=newXmlHttp();
+	var ids=insert_to_attach_table("",getFileName(willupload.value),"即将上传...");
 	uploadajax.onreadystatechange=function(){
 		if(uploadajax.status==200 && uploadajax.readyState==4){
 			var aid=uploadajax.responseText;
-			$(newcell1id).innerHTML=aid;
-			$(newcell3id).innerHTML = " <input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>";
-			useattachment.push(aid);
+			$(ids[0]).innerHTML=aid;
+			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>";
+			useattachment.push(parseInt(aid));
+			$("editor_useattachment").value=JSON.stringify(useattachment);
 		}
     }
 	uploadajax.upload.onprogress=function(up){
-        $(newcell3id).innerHTML=Math.floor((up.loaded / up.total) * 100) + "%";
+        $(ids[2]).innerHTML=Math.floor((up.loaded / up.total) * 100) + "%";
 	}
 	var uploadform=new FormData();
 	uploadform.append('attachment[]',willupload.files[0]);
@@ -272,8 +283,9 @@ function attachmentinput(){
 function deleteattachment(aid){
 	quicklyajax("forums.php?mod=ajaxupload&action=delete&aid="+aid,"get","",true,function(){
 		dialog("删除成功");
+		useattachment.remove(parseInt(aid));
+		$("editor_useattachment").value=JSON.stringify(useattachment);
 	});
-	useattachment.remove(aid);
 }
 function oneditorsubmit(){
 	var smtc=editort.value;

@@ -20,6 +20,7 @@
 		}
 	}elseif($action=='download' && $aid){
 		$data=info_attachment($aid);
+		if(!$data){msg('attachment_noexists');}
 		header('content-type: application/octet-stream');  
 		header('content-disposition: attachment; filename='.$data['name']);  
 		header('content-length: '.$data['size']);  

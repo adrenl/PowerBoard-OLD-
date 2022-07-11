@@ -6,6 +6,7 @@
 	{eval $EDITOR['minlength']=$_G['config']['post']['len']['content_min'];}
 	{eval $EDITOR['maxlength']=$_G['config']['post']['len']['content_max'];}
 	{eval $EDITOR['content']=$post['content'];}
+	{eval $EDITOR['attachmentlist']=$attachmentlist;}
 	{template editor/editor}
 	<input type="checkbox" name="disable_bbcode" value="1" {if $post['disable_bbcode']==1}checked{/if}>{la post_e_disable_bbcode}
 	<input type="checkbox" name="disable_smilies" value="1" {if $post['disable_smilies']==1}checked{/if}>{la post_e_disable_smilies}

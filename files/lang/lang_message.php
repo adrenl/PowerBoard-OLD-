@@ -34,6 +34,7 @@
 		'attachment_too_big'=>'一个或多个附件太大，最大为{MAXSIZE}。',
 		'attachment_today_toomuch'=>'你今天上传的附件太多了，请明天再试。',
 		'attachment_file_invaild'=>'附件文件类型不正确，可以使用的格式有{FILETYPE}。',
+		'attachment_noexists'=>'附件不存在',
 
 		'avatar_too_big'=>'头像大小太大，最大为{MAXSIZE}，而头像的大小为{AVATARSIZE}',
 		'avatar_file_invaild'=>'头像文件类型不正确，可以使用的格式有{FILETYPE}。',

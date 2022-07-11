@@ -21,7 +21,7 @@
 		}
 		return true;
 	}
-	function newpost($arid,$fid,$title,$content,$by,$type="newtopic",$pid=null,$floor=null,$readlevel=0,$disable_bbcode=0,$disable_smilies=0){
+	function newpost($arid,$fid,$title,$content,$by,$type="newtopic",$pid=null,$floor=null,$readlevel=0,$disable_bbcode=0,$disable_smilies=0,$useattachment=array()){
 		checkpost($title,$content,$type);
 		if(getuserexists($by)==false){
 			msg('user_login_isntexists',null,array('USERNAME'=>$by));
@@ -36,7 +36,7 @@
 			$index['totalpost']++;
 			$newdir=$dir."{$newpid}/";
 			mkdir($newdir,0777,true);
-			writeindex($newdir.'1.php',array('by'=>$by,'title'=>$title,'content'=>$content,'sendtime'=>TIMESTAMP,'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies)); //topic
+			writeindex($newdir.'1.php',array('by'=>$by,'title'=>$title,'content'=>$content,'sendtime'=>TIMESTAMP,'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies,'useattachment'=>$useattachment)); //topic
 			writeindex($newdir.'index.php',array('totalfloor'=>1,'lastfloor'=>1)); //topicindex
 			writeindex($dir.'index.php',$index); //forumindex
 			msg('post_topic_new_success',"forums.php?mod=view&arid={$arid}&fid={$fid}&pid={$newpid}");
@@ -47,7 +47,7 @@
 			$index['totalpost']++;
 			$index2['totalfloor']++;
 			$index2['lastfloor']++;
-			writeindex($newdir.$index2['lastfloor'].'.php',array('by'=>$by,'title'=>$title,'content'=>$content,'sendtime'=>TIMESTAMP,'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies)); //Reply
+			writeindex($newdir.$index2['lastfloor'].'.php',array('by'=>$by,'title'=>$title,'content'=>$content,'sendtime'=>TIMESTAMP,'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies,'useattachment'=>$useattachment)); //Reply
 			writeindex($newdir.'index.php',$index2); //Topic index
 			writeindex($dir.'index.php',$index); //Forum index
 			msg('post_reply_new_success',"forums.php?mod=view&arid={$arid}&fid={$fid}&pid={$pid}#f".$index2['lastfloor']);

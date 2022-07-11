@@ -123,12 +123,13 @@
 			if($iinfo['mime']!='image/png') {
 				$colorimg=imagecreatetruecolor($iinfo[0],$iinfo[1]);
 			}
-			imagealphablending($image,true);
-			imagesavealpha($image,true);
 			if($iinfo['mime']!='image/png') {
 				imagecopy($colorimg,$image,0,0,0,0,$iinfo[0],$iinfo[1]);
 				$image=$colorimg;
 			}
+			imagealphablending($watermark,false);
+			imagesavealpha($watermark,true);
+			imagesavealpha($image,true);
 			imagecopy($image,$watermark,$x,$y,0,0,$water_w,$water_h);
 		}
 		/////
@@ -152,7 +153,6 @@
 		}
 		imagedestroy($image);
 		imagedestroy($watermark);
-		
 	}
 	function isanimatedgif($filename){
 		$fp=fopen($filename,'rb');
@@ -172,7 +172,8 @@
 	function delete_attachment($aid){
 		global $todir;
 		global $_G;
-		$index=readindex($todir.'index');
+		$aid=intval($aid);
+		$index=readindex($todir.'index.php');
 		if($aid){
 			unlink($index[$aid]['file']);
 			unset($index[$aid]);
@@ -181,11 +182,5 @@
 		}else{
 			return false;
 		}
-	}
-	function _info_attachment($aid){
-		global $todir;
-		echo $aid;
-		$index=readindex($todir.'index.php');
-		return $index[intval($aid)];
 	}
 ?>

@@ -360,9 +360,17 @@
 	function writeindex($file,$data=array()){
 		return @file_put_contents($file,PHP_DIE."\n".@serialize($data));
 	}
-	function info_attachment($aid){
-		global $todir;
+	function info_attachment($aid){ //array|int $aid
 		$index=readindex('data/attachment/index.php');
-		return $index[intval($aid)];
+		if(is_array($aid)){
+			foreach($aid as $v){
+				$v=intval($v);
+				$return[$v]=$index[$v];
+			}
+			return $return;
+		}else{
+			$aid=intval($aid);
+			return $index[$aid];
+		}
 	}
 ?>

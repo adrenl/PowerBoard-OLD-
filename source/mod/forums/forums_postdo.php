@@ -26,14 +26,15 @@
 		$disable_bbcode=gpcget('disable_bbcode');
 		$disable_smilies=gpcget('disable_smilies');
 		$delete_post=gpcget('delete_post');
+		$useattachment=json_decode(gpcget('editor_useattachment'),true);
 		if($action=='newtopic'){
 			//submitcheck(gpcget('secode'));
-			newpost($arid,$fid,$title,$content,$by,$action,null,null,$readlevel,$disable_bbcode,$disable_smilies);
+			newpost($arid,$fid,$title,$content,$by,$action,null,null,$readlevel,$disable_bbcode,$disable_smilies,$useattachment);
 		}elseif($action=='newreply'){
 			submitcheck(gpcget('secode'));
-			newpost($arid,$fid,$title,$content,$by,$action,$pid,$floor,0,$disable_bbcode,$disable_smilies);
+			newpost($arid,$fid,$title,$content,$by,$action,$pid,$floor,0,$disable_bbcode,$disable_smilies,$useattachment);
 		}elseif($action=='editpost'){
-			editpost($arid,$fid,$title,$content,$by,$pid,$floor,$readlevel,$disable_bbcode,$disable_smilies,$delete_post);
+			editpost($arid,$fid,$title,$content,$by,$pid,$floor,$readlevel,$disable_bbcode,$disable_smilies,$delete_post,$useattachment);
 		}
 	}else{
 		$navtitle=lang('common','newtopic');
@@ -41,6 +42,7 @@
 			$navtitle=lang('common','post_edit');
 			$post=getpost($arid,$fid,$pid,$floor,false);
 			$post['content']=htmlspecialchars_decode($post['content']);
+			$attachmentlist=@json_encode(@array_column(info_attachment($post['useattachment']),'name','aid'));
 		}elseif($action=='newreply'){
 			$navtitle=lang('common','newreply');
 		}

@@ -5,8 +5,9 @@
 			GZip<?=$_G['config']['gzip']?'启用':'停用' ?>
 		</div>
 		<script>
+			lazyload();
 			window.onscroll=function(){
-				try{lazyload();}catch(e){}
+				lazyload();
 			}
 		</script>
 	</body>

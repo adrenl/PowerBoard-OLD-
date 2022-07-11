@@ -6,6 +6,7 @@
 	<?php $EDITOR['minlength']=$_G['config']['post']['len']['content_min']; ?>
 	<?php $EDITOR['maxlength']=$_G['config']['post']['len']['content_max']; ?>
 	<?php $EDITOR['content']=$post['content']; ?>
+	<?php $EDITOR['attachmentlist']=$attachmentlist; ?>
 	<?php include template('editor/editor','default');?>
 	<input type="checkbox" name="disable_bbcode" value="1" <?php if($post['disable_bbcode']==1){ ?>checked<?php } ?>>禁用BBCode
 	<input type="checkbox" name="disable_smilies" value="1" <?php if($post['disable_smilies']==1){ ?>checked<?php } ?>>禁用表情

@@ -5,8 +5,9 @@
 			GZip{out $_G['config']['gzip']?'{la enable}':'{la disable}' }
 		</div>
 		<script>
+			lazyload();
 			window.onscroll=function(){
-				try{lazyload();}catch(e){}
+				lazyload();
 			}
 		</script>
 	</body>

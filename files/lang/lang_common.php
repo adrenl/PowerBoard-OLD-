@@ -120,6 +120,7 @@
 		'e_video'=>'视频',
 		'e_audio'=>'音频',
 		'attachment'=>'附件',
+		'attachment_noexists'=>'附件不存在',
 		'e_sup'=>'上标',
 		'e_sub'=>'下标',
 		'e_quote'=>'引用',

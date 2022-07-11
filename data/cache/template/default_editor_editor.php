@@ -4,11 +4,13 @@
 	<?php $EDITOR['minimode']=isset($EDITOR['minimode'])?$EDITOR['minimode']:0; ?>
 	<?php $EDITOR['useattachment']=isset($EDITOR['useattachment'])?$EDITOR['useattachment']:1; ?>
 	<?php $EDITOR['content']=isset($EDITOR['content'])?$EDITOR['content']:''; ?>
+	<?php $EDITOR['attachmentlist']=isset($EDITOR['attachmentlist'])?$EDITOR['attachmentlist']:null; ?>
 	<script>
 		var e_minlength=<?php echo $EDITOR['minlength'];?>;
 		var e_maxlength=<?php echo $EDITOR['maxlength'];?>;
 		var e_minimode=<?php echo $EDITOR['minimode'];?>;
 		var e_useattachment=<?php echo $EDITOR['useattachment'];?>;
+		var e_original_attach=<?=$EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"?>;
 	</script>
 	<link rel="stylesheet" type="text/css" href="data/cache/template/css_default_editor.css">
 	<div id="editor_toolbar">
@@ -48,7 +50,7 @@
 	</fieldset>
 	<?php if($EDITOR['useattachment']){ ?>
 	<fieldset id="attachment_fieldset" style="display:none;">
-		<legend>?e_attachment?</legend>
+		<legend>附件</legend>
 		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span>
 		<!--<div id="attachmentdiv">
 			
@@ -65,6 +67,7 @@
 	<?php } ?>
 	<textarea id="editor_textarea" name="editor_textarea"><?php echo $EDITOR['content'];?></textarea>
 	<textarea id="editor_data" name="editor_content" style="display:none;"></textarea>
+	<input type="hidden" name="editor_useattachment" id="editor_useattachment" value="">
 	<div id="editor_bottombar">
 		<a href="javascript:;" onclick="savedata()">保存内容</a>(<input type="checkbox" id="autosave" onclick="autosavecheck();" checked>自动)
 		<a href="javascript:;" onclick="loaddata()">恢复内容</a>
