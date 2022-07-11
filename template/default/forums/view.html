@@ -1,0 +1,28 @@
+{template common/header}
+<div class="div_father">
+	<div class="div_title">{la topic} - {$floors['f']['1']['title']}</div>
+	<div class="div_content">
+		<table border="1" style="width:100%">
+			{foreach $floors['f'] $floor $data}
+				<tr>
+					<td valign="baseline" style="width:10%" id="f{$floor}">{avatar $data['profile']['uid']} <i class="fright graytext">#{$floor}</i><br>
+					{la by}: {$data['by']}<br>
+					{la sendtime}: {date $data['sendtime']}
+					{if $data['profile']['uid']==$_G['user']['uid']}
+						<br>
+						<a href="forums.php?mod=postdo&action=editpost&arid={$arid}&fid={$fid}&pid={$pid}&floor={$floor}">{la post_edit}</a>
+					{/if}
+					</td>
+					<td valign="baseline">
+						{if $data['title']}<b>{$data['title']}</b><br>{/if}
+						{$data['content']}
+					</td>
+				</tr>
+			{/foreach}
+				<tr>
+					<td colspan="2" class="center"><a href="forums.php?mod=postdo&action=newreply&arid={$arid}&fid={$fid}&pid={$pid}"><button>{la newreply}</button></a></td>
+				</tr>
+		</table>
+	</div>
+</div>
+{template common/footer}

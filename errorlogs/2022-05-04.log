@@ -1,0 +1,16 @@
+一个错误发生在2022-05-04 10:04:57
+级别：2=>WARNING
+原因：file_get_contents(template/default/message.html): failed to open stream: No such file or directory
+文件：F:\BluestacksCN\Apks\phpstudy_pro\WWW\PowerBoard\source\parse_tpl.php
+行数：6
+代码：		$wparse=file_get_contents($html);
+
+---------------------分割---------------------
+一个错误发生在2022-05-04 14:44:29
+级别：2=>WARNING
+原因：file_get_contents(template/default/message.html): failed to open stream: No such file or directory
+文件：F:\BluestacksCN\Apks\phpstudy_pro\WWW\PowerBoard\source\parse_tpl.php
+行数：6
+代码：		$wparse=file_get_contents($html);
+
+---------------------分割---------------------

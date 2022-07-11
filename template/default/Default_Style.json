@@ -1,0 +1,11 @@
+{
+ "information": {
+  "by": "NewAdryKB", 
+  "stylename": "Default Style For Default Template", 
+  "version": "1.0",
+  "fortemplate": "{THISTPL}",
+ }, 
+ "style": {
+  "font": "\"SimSun\""
+ }
+}

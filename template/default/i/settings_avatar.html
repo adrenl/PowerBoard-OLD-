@@ -1,0 +1,16 @@
+{template common/header}
+<div class="div_father column_r">
+	<div class="div_title">{la settings} - {la avatar}</div>
+	<div class="div_content">
+		<b>{la avatar_your_avater}</b><br>
+		{avatar $_G['user']['uid']}<br><br>
+		<b>{la avatar_set_you}</b><br>
+		<form action="i.php?mod=settings&do=avatar&submit=yes" method="post" enctype="multipart/form-data">
+			{la avater_set_you_msg}<br>
+			<input type="file" name="avatar"><br>
+			<input type="submit" class="submitbtn" value="{la upload}">
+		</form>
+	</div>
+</div>
+{subtemplate i/menu}
+{template common/footer}

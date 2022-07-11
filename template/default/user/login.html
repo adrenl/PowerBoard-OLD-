@@ -1,0 +1,20 @@
+{template common/header}
+<div class="div_father">
+	<div class="div_title">{la login}</div>
+	<div class="div_content">
+		<div class="formcenter">	
+			<form method="post" action="user.php?mod=login&submit=yes">
+				<select name="howlogin"><option value="false">{la username}</option><option value="true">{la uid}</option></select>:<input type="text" name="username" required>
+				<hr class="xx">
+				{la password}:<input type="password" name="password" required>
+				<hr class="xx">
+				{la cookie_time}:<input type="radio" name="cookietime" value="315360000" checked>{la permanent} <input type="radio" name="cookietime" value="2592000">{la 1monent} <input type="radio" name="cookietime" value="86400">{la 1day} <input type="radio" name="cookietime" value="3600">{la 1hour} <input type="radio"name="cookietime" value="0">{la notime}
+				<hr class="xx">
+				{la secode}: {SECODE}
+				<hr class="xx">
+				<input type="submit" class="submitbtn" value="{la login}">&nbsp;<input type="reset" value="{la reset}">
+			</form>
+		</div>
+	</div>
+</div>
+{template common/footer}

@@ -1,0 +1,16 @@
+{template common/header}
+{foreach $out $arid $area}
+	<div class="div_father">
+		<div class="div_title">{la area} - {$area['name']}</div>
+	{foreach $area['area'] $fid $forums}
+		<div class="div_content div_with_color_list"><a href="forums.php?mod=display&arid={$arid}&fid={$fid}">{$forums['name']}</a></div>
+	{/foreach}
+	</div>
+	<br>
+{/foreach}
+	<hr>
+<div class="div_father">
+	<div class="div_title">Misc</div>
+	<div class="div_content">Misc Content</div>
+</div>
+{template common/footer}

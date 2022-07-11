@@ -1,0 +1,21 @@
+{template common/header}
+<div class="div_father column_r">
+	<div class="div_title">{la myself_profile}</div>
+	<div class="div_content">
+		<div class="fleft">{avatar $profile['uid']}</div>
+		<div>
+			<b>{$profile['username']}</b> {la guanli}
+			<br>
+			{la uid}: {$profile['uid']} <span class="graytext">({$_G['config']['bburl']}i.php?mod=profile&user={$user})</span>
+			<hr class="xx">
+		</div>
+		<br>
+		<ul class="ulnostyle">
+			<li>{la email}: {$profile['email']}</li>
+			<li>{la lastlogintime}: {$profile['lastlogintime']}</li>
+			<li>{la regtime}: {$profile['regtime']}</li>
+		</ul>
+	</div>
+</div>
+{subtemplate i/menu}
+{template common/footer}
