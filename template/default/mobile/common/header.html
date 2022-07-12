@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{$navtitle} - {$_G['config']['bbname']}</title>
+		<script src="files/javascript/all.js"></script>
+		<meta charset="UTF-8">
+		<meta name="description" content="{$_G['config']['seo']['keyword']}">
+		<meta name="keywords" content="{$_G['config']['seo']['description']}">
+		<base href="{$_G['siteurl']}">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link rel="stylesheet" href="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.css">
+		<script src="files/javascript/jquery_mobile/jquery.min.js"></script>
+		<script src="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
+		<script>
+			var IMGDIR="{IMGDIR}";
+			var SITEURL="{$_G['siteurl']}";
+			var CSSFILE="{css common}";
+			var BBURL="{$_G['config']['bburl']}";
+		</script>
+	</head>
+	<body>
+		<!--<div id="headnav">{if islogin()==false} {la welcomeguest}<i class="h"></i><a href="user.php?mod=register">{la register}</a><i class="h"></i><a href="user.php?mod=login">{la login} </a>{else} {la welcomeuser} {$_G['user']['username']}<i class="h"></i><a href="i.php?mod=profile">{la myself_profile}</a><i class="h"></i><a href="user.php?mod=exit">{la loginout}</a> {/if}<a style="float:right;" href="{BADLINK}" onclick="addfavourite('{$_G['config']['bburl']}','{$_G['config']['bbname']}');">{la addfavourite}</a></div>
+		<div id="header">
+		<a href="./"><img src="{$_G['config']['bblogo']}" title="{$_G['config']['bbname']}" alt="{$_G['config']['bbname']}"></a><br>
+		{la nowloca} {$navtitle}
+		</div>-->
+		<div data-role="page">
+			<div data-role="header">
+				<h1>
+					{$navtitle} - {$_G['config']['bbname']}<br>
+					{la nowloca} {$navtitle}
+				</h1>
+			</div>

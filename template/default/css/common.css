@@ -1,7 +1,13 @@
+* {
+	word-wrap:break-word;
+}
 body{
-	font:{PAGE_FONTSIZE} {PAGE_FONTFAMILY};
-	background:{BACKGROUND};
+	font:12px "New SimSun","SimSun",Tahoma,Helvetica,"Microsoft Yahei",sans-serif;
+	background:#FFF;/**url({IMGDIR}bg.png) white;**/
 	color:#000000;
+	min-width:700px;
+	margin:0;
+	padding:0;
 }
 table{
 	border-collapse:collapse;
@@ -12,20 +18,31 @@ table{
 	font-style:normal;
 }
 #headnav{
-	border:{DEFAULT_BORDER};
-	margin:3px -1px 14px -1px;
-	background-color:#9fc8df;
+	border-bottom:1px solid #cdcdcd;
+	background-color:#f2f2f2;
 	padding:3px;
+	margin-bottom:3px;
+}
+#header{
+	margin:10px;
+	padding-bottom:2px;
+	border-bottom:1px solid black;
+}
+#footer{
+	margin:10px;
+	padding-top:2px;
+	border-top:1px solid black;
 }
 .div_father{
-	border:{DEFAULT_BORDER};
+	border:1px solid #86b9d6;
+	margin:10px;
 }
 .div_title{
 	background-color:#a3cde4;
 	color:#FFFFFF;
 	font-weight:bold;
 	padding:3px;
-	border-bottom:{DEFAULT_BOARD};
+	border-bottom:1px solid #86b9d6;
 }
 .div_content{
 	padding:3px;

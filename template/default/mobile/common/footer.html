@@ -1,0 +1,14 @@
+			<div data-role="footer">
+				<h1>{la copyright} {$_G['config']['startyear']}-{out date('Y')} &copy;{$_G['config']['bbname']}<br>
+				{la poweredby} {out POWERBOARD_VERSION}<br>
+				GZip{out $_G['config']['gzip']?'{la enable}':'{la disable}' }</h1>
+			</div>
+		</div>
+		<script>
+			lazyload();
+			window.onscroll=function(){
+				lazyload();
+			}
+		</script>
+	</body>
+</html>

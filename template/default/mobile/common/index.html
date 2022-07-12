@@ -1,0 +1,10 @@
+{template common/header}
+{foreach $out $arid $area}
+	<div data-role="collapsible">
+		<h1>{la area} - {$area['name']}</h1>
+	{foreach $area['area'] $fid $forums}
+		<p><a href="forums.php?mod=display&arid={$arid}&fid={$fid}">{$forums['name']}</a></p>
+	{/foreach}
+	</div>
+{/foreach}
+{template common/footer}

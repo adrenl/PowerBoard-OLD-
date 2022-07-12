@@ -6,7 +6,6 @@
 		<div class="div_content div_with_color_list"><a href="forums.php?mod=display&arid=<?php echo $arid;?>&fid=<?php echo $fid;?>"><?php echo $forums['name'];?></a></div>
 	<?php } }?>
 	</div>
-	<br>
 <?php } }?>
 	<hr>
 <div class="div_father">

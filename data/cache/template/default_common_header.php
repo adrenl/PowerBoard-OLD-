@@ -18,6 +18,7 @@
 	</head>
 	<body>
 		<div id="headnav"><?php if(islogin()==false){ ?> 你好，游客<i class="h"></i><a href="user.php?mod=register">注册</a><i class="h"></i><a href="user.php?mod=login">登陆 </a><?php }else{ ?> 你好， <?php echo $_G['user']['username'];?><i class="h"></i><a href="i.php?mod=profile">个人主页</a><i class="h"></i><a href="user.php?mod=exit">退出登录</a> <?php } ?><a style="float:right;" href="javascript:;" onclick="addfavourite('<?php echo $_G['config']['bburl'];?>','<?php echo $_G['config']['bbname'];?>');">加入收藏</a></div>
+		<div id="header">
 		<a href="./"><img src="<?php echo $_G['config']['bblogo'];?>" title="<?php echo $_G['config']['bbname'];?>" alt="<?php echo $_G['config']['bbname'];?>"></a><br>
 		当前位置： <?php echo $navtitle;?>
-		<hr>
+		</div>

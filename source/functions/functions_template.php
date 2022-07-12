@@ -15,8 +15,15 @@
 			$tplhtmlpath=str_replace($tplid,'default',$tplhtmlpath);
 			$tplhtmltemppath=str_replace($tplid,'default',$tplhtmltemppath);
 		}
+		if(IN_MOBILE){
+			$tplhtmlpath="{$tplpath}mobile/{$file}.html";
+			$tplhtmltemppath="data/cache/template/{$tplid}_m_".str_replace('/','_',$file).'.php';
+			if(!file_exists($tplhtmlpath)){
+				$tplhtmlpath="{$tplpath}{$file}.html";
+			}
+		}
 		if(file_exists($tplhtmltemppath) && filemtime($tplhtmltemppath)==filemtime($tplhtmlpath)){
-			return $tplhtmltemppath;
+		//	return $tplhtmltemppath;
 		}
 		$parse=file_get_contents($tplhtmlpath);
 		//Parse start
@@ -73,15 +80,15 @@
 		$tplcsspath="{$tplpath}css/{$cssname}.css";
 		$tplcsstemppath="data/cache/template/css_{$tplid}_{$cssname}.css";
 		if(file_exists($tplcsstemppath) && filemtime($tplcsstemppath)==filemtime($tplcsspath)){
-			return $tplcsstemppath;
+		//	return $tplcsstemppath;
 		}
 		$parse=file_get_contents($tplcsspath);
 		//Parse start
 		$parse=preg_replace("/([\n\r]+)\t+/is","",$parse);
-		$parse=str_replace('{DEFAULT_BORDER}','1px solid #86b9d6',$parse);
-		$parse=str_replace('{BACKGROUND}','url({IMGDIR}bg.png) white',$parse);
-		$parse=str_replace('{PAGE_FONTFAMILY}','"New SimSun","SimSun",Tahoma,Helvetica,"Microsoft Yahei",sans-serif',$parse);
-		$parse=str_replace('{PAGE_FONTSIZE}','12px',$parse);
+		//$parse=str_replace('{DEFAULT_BORDER}','1px solid #86b9d6',$parse);
+		//$parse=str_replace('{BACKGROUND}','url({IMGDIR}bg.png) white',$parse);
+		//$parse=str_replace('{PAGE_FONTFAMILY}','"New SimSun","SimSun",Tahoma,Helvetica,"Microsoft Yahei",sans-serif',$parse);
+		//$parse=str_replace('{PAGE_FONTSIZE}','12px',$parse);
 		$parse=str_replace('{IMGDIR}',$_G['config']['bburl'].'files/imgs/common/',$parse);
 		$parse=str_replace('{BBURL}',$_G['config']['bburl'],$parse);
 		$parse=str_replace('{TPLPATH}',$_G['config']['bburl'].$tplpath,$parse);
