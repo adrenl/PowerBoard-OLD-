@@ -1,0 +1,20 @@
+{template common/header}
+<form method="post" action="forums.php?mod=postdo&action={$action}&arid={$arid}&fid={$fid}&pid={$pid}&floor={$floor}&submit=yes" onsubmit="return postcheck($('title').value,$('editor_textarea').value,{$_G['config']['post']['len']['title_max']},{$_G['config']['post']['len']['title_min']},{$_G['config']['post']['len']['content_max']},{$_G['config']['post']['len']['content_min']});" enctype="multipart/form-data">
+	<script src="files/javascript/post.js"></script>
+	<script>var action='{$action}';var floor='{$floor}';</script>
+	<span {out $action=='newreply' || $floor>1  ?"style='display:none'":''}> {la title}:<input type="text" name="title" class="w95" id="title" value="{$post['title']}"></span>
+	{eval $EDITOR['minlength']=$_G['config']['post']['len']['content_min'];}
+	{eval $EDITOR['maxlength']=$_G['config']['post']['len']['content_max'];}
+	{eval $EDITOR['content']=$post['content'];}
+	{eval $EDITOR['attachmentlist']=$attachmentlist;}
+	{template editor/editor}
+	<input type="checkbox" name="disable_bbcode" value="1" {if $post['disable_bbcode']==1}checked{/if}>{la post_e_disable_bbcode}
+	<input type="checkbox" name="disable_smilies" value="1" {if $post['disable_smilies']==1}checked{/if}>{la post_e_disable_smilies}
+	{if $action!='newreply'}&nbsp;{la post_e_readlevel} <input type="number" name="readlevel" min="0" class="wnunberi" value="{$post['readlevel']}">{/if}
+	{if $action=='editpost'}<br><input type="checkbox" name="delete_post" value="1">{la post_delete} ({la post_delete_msg}) {/if}
+	{if $action=='newtopic' || $action=='newreply'}
+		<br>{la secode}: {SECODE}<br>
+	{/if}
+	<p class="center"><input type="submit" class="submitbtn" value="{la submit}"></p>
+</form>
+{template common/footer}

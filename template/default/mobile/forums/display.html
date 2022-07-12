@@ -1,0 +1,30 @@
+{template common/header}
+{eval $thisarea=$_G['config']['forums'][$arid]}
+{eval $thisforum=$thisarea['area'][$fid]}
+<div class="div_father">
+	<div class="div_title">{$thisarea['name']} - {$thisforum['name']}</div>
+	<div class="div_content">
+		{la forum_description}: {$thisforum['description']}<hr>
+		[<a href="forums.php?mod=postdo&action=newtopic&arid={$arid}&fid={$fid}">{la newtopic}</a>]<a href="{$_G['config']['bburl']}misc.php?mod=rss&arid={$arid}&fid={$fid}" class="fright" style="margin-bottom:2px;"><img src="{IMGDIR}rss.gif"></a>
+		<table style="width:100%;" border="1">
+			<tr>
+				<th style="width:70%">{la title}</th>
+				<th style="width:15%">{la by}</th>
+				<th style="width:15%">{la sendtime}</th>
+			</tr>
+			{if !@array_key_exists(1,$posts['p'])}
+				<tr><td colspan="3" class="center">{la forum_nodata}</td></tr>
+			{else}
+				{foreach $posts['p'] $pid $post}
+					<tr>
+						<td><a href="forums.php?mod=view&arid={$arid}&fid={$fid}&pid={$pid}">{$post['title']}</a></td>
+						<td>{$post['by']}</td>
+						<td>{date $post['sendtime']}</td>
+					</tr>
+				{/foreach}
+			{/if}
+		</table>
+		[<a href="forums.php?mod=postdo&action=newtopic&arid={$arid}&fid={$fid}">{la newtopic}</a>]
+	</div>
+</div>
+{template common/footer}

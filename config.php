@@ -4,7 +4,7 @@
 	  'msg_wait_time' => 5000,
 	  'bbname' => 'PowerBoard',
 	  'bburl' => 'http://192.168.1.100/PowerBoard/',
-	  'bblogo' => 'http://192.168.1.100/PowerBoard/files/imgs/common/logo.png',
+	  'bblogo' => 'http://192.168.1.100/PowerBoard/files/imgs/common/logo.svg',
 	  'gzip' => false,
 	  'max_online_time' => 3600,
 	  'admin' => 'adrenl',

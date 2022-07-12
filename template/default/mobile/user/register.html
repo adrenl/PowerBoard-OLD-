@@ -1,0 +1,20 @@
+{template common/header}
+<div class="div_father">
+	<div class="div_title">{la login}</div>
+	<div class="div_content">
+		<div class="formcenter">	
+			<form method="post" action="user.php?mod=register&submit=yes">
+				<i class="rq"></i>{la username}:<input type="text" name="username" required> {la len} {$_G['config']['user']['len']['name_min']}~{$_G['config']['user']['len']['name_max']}
+				<hr class="xx">
+				<i class="rq"></i>{la password}:<input type="password" name="password" required> {la len} {$_G['config']['user']['len']['password_min']}~{$_G['config']['user']['len']['password_max']}
+				<hr class="xx">
+				<i class="rq"></i>{la email}:<input type="email" name="email" required>
+				<hr class="xx">
+				<i class="rq"></i>{la secode}: {SECODE}
+				<hr class="xx">
+				<input type="submit" class="submitbtn" value="{la login}">&nbsp;<input type="reset" value="{la reset}">
+			</form>
+		</div>
+	</div>
+</div>
+{template common/footer}

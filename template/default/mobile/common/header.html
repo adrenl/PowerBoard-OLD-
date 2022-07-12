@@ -8,11 +8,12 @@
 		<meta name="keywords" content="{$_G['config']['seo']['description']}">
 		<base href="{$_G['siteurl']}">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-
+		<link rel="stylesheet" href="{css m_common}">
 		<link rel="stylesheet" href="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.css">
 		<script src="files/javascript/jquery_mobile/jquery.min.js"></script>
 		<script src="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
 		<script>
+			jQuery.noConflict(true);
 			var IMGDIR="{IMGDIR}";
 			var SITEURL="{$_G['siteurl']}";
 			var CSSFILE="{css common}";
@@ -20,15 +21,25 @@
 		</script>
 	</head>
 	<body>
-		<!--<div id="headnav">{if islogin()==false} {la welcomeguest}<i class="h"></i><a href="user.php?mod=register">{la register}</a><i class="h"></i><a href="user.php?mod=login">{la login} </a>{else} {la welcomeuser} {$_G['user']['username']}<i class="h"></i><a href="i.php?mod=profile">{la myself_profile}</a><i class="h"></i><a href="user.php?mod=exit">{la loginout}</a> {/if}<a style="float:right;" href="{BADLINK}" onclick="addfavourite('{$_G['config']['bburl']}','{$_G['config']['bbname']}');">{la addfavourite}</a></div>
-		<div id="header">
-		<a href="./"><img src="{$_G['config']['bblogo']}" title="{$_G['config']['bbname']}" alt="{$_G['config']['bbname']}"></a><br>
-		{la nowloca} {$navtitle}
-		</div>-->
 		<div data-role="page">
 			<div data-role="header">
 				<h1>
-					{$navtitle} - {$_G['config']['bbname']}<br>
-					{la nowloca} {$navtitle}
+					<a href="./">{$_G['config']['bbname']}</a><br>
 				</h1>
 			</div>
+			<div data-role="navbar">
+				<ul>
+					{if !islogin()}
+					<li><a href="user.php?mod=login">{la login}</a></li>
+					<li><a href="user.php?mod=register">{la register}</a></li>
+					{else}
+					<li><a href="i.php?mod=profile">{la myself_profile}</a></li>
+					<li><a href="user.php?mod=exit">{la loginout}</a></li>
+					{/if}
+				</ul>
+			</div>
+			<a  href="./" data-role="none"><img src="{$_G['config']['bblogo']}" title="{$_G['config']['bbname']}" alt="{$_G['config']['bbname']}"></a>
+			<span class="atpicright">
+			{if !islogin()} {la welcomeguest} {else} {la welcomeuser} {$_G['user']['username']} <br> {la nowloca} {$navtitle}{/if}
+			</span>
+			<br>

@@ -1,8 +1,6 @@
 {template common/header}
-<div class="div_father">
-	<div class="div_title">{$_G['config']['bbname']} {la tipsmessage}</div>
-	<div class="div_content">
-		<div class="message">
+		<div class="ui-content ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all" style="text-align:center">
+			<h4>{$_G['config']['bbname']} {la tipsmessage}</h4>
 			{$message}
 			<br><br>
 			{if $url}
@@ -12,6 +10,5 @@
 				<a href="{BADLINK}" onclick="history.go(-1);"> {la back_to_page} </a> 
 			{/if}
 		</div>
-	</div>
-</div>
+		<br>
 {template common/footer}

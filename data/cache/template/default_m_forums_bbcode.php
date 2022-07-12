@@ -34,17 +34,6 @@ EOF;
 }
 function tpl_bb_dplayer($src,$width=null,$height=null){
 	$thisid='dplayer_'.rand(0,2990);
-	if($width || $height){
-	$width=$width.'px';
-	$height=$height.'px';
- ?>
-<?php $return= <<<EOF
-<div class="video"><div id="$thisid" style="width: $width ;height: $height ;"></div><script>init_dplayer($("$thisid"),"$src");</script>
-<p class="center"><a href="$src" class="graytext" target="_blank"> 新窗口打开 </a></p></div>
-EOF;
-?>
-<?php 
-	}else{
  ?>
 <?php $return= <<<EOF
 <div class="video"><div id="$thisid"></div><script>init_dplayer($("$thisid"),"$src");</script>
@@ -52,7 +41,6 @@ EOF;
 EOF;
 ?>
 <?php 
-	}
 	return $return;
 }
 function tpl_bb_attachment($data){
