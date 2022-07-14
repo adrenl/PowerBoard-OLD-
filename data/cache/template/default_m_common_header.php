@@ -13,6 +13,7 @@
 		<script src="files/javascript/jquery_mobile/jquery.min.js"></script>
 		<script src="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
 		<script>
+		jQuery.mobile.ajaxEnabled=false;
 			jQuery.noConflict(true);
 			var IMGDIR="files/imgs/common/";
 			var SITEURL="<?php echo $_G['siteurl'];?>";
@@ -38,6 +39,7 @@
 					<?php } ?>
 				</ul>
 			</div>
+			<div style="margin:5px;">
 			<a  href="./" data-role="none"><img src="<?php echo $_G['config']['bblogo'];?>" title="<?php echo $_G['config']['bbname'];?>" alt="<?php echo $_G['config']['bbname'];?>"></a>
 			<span class="atpicright">
 			<?php if(!islogin()){ ?> 你好，游客 <?php }else{ ?> 你好， <?php echo $_G['user']['username'];?> <br> 当前位置： <?php echo $navtitle;?><?php } ?>

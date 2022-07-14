@@ -5,6 +5,9 @@
 		By:NewAdryKB
 		Powered by PowerBoard
 	**/
+	if(!in_array($action,array('','delete','imgview','download','updata'))){
+		header('location: '.$_G['siteurl']);
+	}
 	include libfile('functions/upload');
 	$action=gpcget('action');
 	$aid=gpcget('aid');
@@ -27,7 +30,7 @@
 		readfile($data['file']);
 	}
 	if(($_FILES)!==array() || !empty($_FILES)){
-		echo start_upload();
+		echo gpcget('action')=='updata'?start_upload(true,gpcget('aid')):start_upload();
 	}else{
 		echo "Error";
 	}

@@ -1,6 +1,6 @@
 <?php die();?>
-a:8:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:289:"[audio]http://192.168.1.100/testaudio/dog.ogg[/audio]
-[video=400,400]http://192.168.1.100/gb.mp4[/video]
+a:6:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:281:"[audio]http://localhost/testaudio/dog.ogg[/audio]
+[video=400,400]http://localhost/gb.mp4[/video]
 {13}
 [hr/]
 [table=100%]
@@ -19,4 +19,4 @@ a:8:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:289:"[audio]htt
 [td]8[/td]
 [td]9[/td]
 [/tr]
-[/table]";s:8:"sendtime";i:1657590974;s:9:"readlevel";i:0;s:14:"disable_bbcode";N;s:15:"disable_smilies";N;s:13:"useattachment";N;}
+[/table]";s:8:"sendtime";i:1657590974;s:14:"disable_bbcode";N;s:15:"disable_smilies";N;}

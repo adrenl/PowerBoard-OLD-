@@ -8,7 +8,7 @@
 	$todir='data/attachment/';
 	$files=array();
 	$config=$_G['config']['file']['attachment'];
-	function start_upload(){
+	function start_upload($isupdata=false,$aid=0){
 		global $config;
 		global $files;
 		global $todir;
@@ -36,22 +36,39 @@
 				if(is_uploaded_file($files[$k]['tmp_name'])){
 					if($files[$k]['size']<$config['max_size']){
 						if(in_array(strtolower($extension),$config['file_type'])){
+							unlink($index[$aid]['file']);
 							$newname=$todir.md5($name.time().rand(0,255)).'.'.$extension;
 							move_uploaded_file($files[$k]['tmp_name'],$newname);
-							$index['lastaid']++;
-							$index[$index['lastaid']]=array(
-								'aid'=>$index['lastaid'],
-								'name'=>$name,
-								'file'=>$newname,
-								'size'=>$files[$k]['size'],
-								'type'=>$files[$k]['type'],
-								'isimg'=>false,
-								'time'=>time(),
-								'by'=>$_G['user']['username']
-							);
-							$return[]=$index['lastaid'];
+							if($isupdata && $aid){
+								$aid=intval($aid);
+								$index[$aid]=array(
+									'aid'=>$aid,
+									'name'=>$name,
+									'file'=>$newname,
+									'size'=>$files[$k]['size'],
+									'type'=>$files[$k]['type'],
+									'isimg'=>false,
+									'time'=>time(),
+									'by'=>$_G['user']['username']
+								);
+								$return[]=$aid;
+							}else{
+								$index['lastaid']++;
+								$index[$index['lastaid']]=array(
+									'aid'=>$index['lastaid'],
+									'name'=>$name,
+									'file'=>$newname,
+									'size'=>$files[$k]['size'],
+									'type'=>$files[$k]['type'],
+									'isimg'=>false,
+									'time'=>time(),
+									'by'=>$_G['user']['username']
+								);
+								$return[]=$index['lastaid'];
+							}
+							
 							if(stripos($files[$k]['type'],'image')!==false){
-								$index[$index['lastaid']]['isimg']=true;
+								!$isupdata?$index[$index['lastaid']]['isimg']=true:$index[$aid]['isimg']=true;
 								watermark($newname,$config['image_watermark_status']);
 							}
 						}

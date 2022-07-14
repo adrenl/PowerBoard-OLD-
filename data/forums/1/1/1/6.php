@@ -1,0 +1,2 @@
+<?php die();?>
+a:8:{s:2:"by";s:8:"Mob User";s:5:"title";s:0:"";s:7:"content";s:10:"好水{13}";s:8:"sendtime";i:1657784422;s:9:"readlevel";i:0;s:14:"disable_bbcode";N;s:15:"disable_smilies";N;s:13:"useattachment";N;}

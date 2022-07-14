@@ -13,7 +13,18 @@
 	<?php if($action!='newreply'){ ?>&nbsp;阅读级别 <input type="number" name="readlevel" min="0" class="wnunberi" value="<?php echo $post['readlevel'];?>"><?php } ?>
 	<?php if($action=='editpost'){ ?><br><input type="checkbox" name="delete_post" value="1">删除帖子 (勾选后并提交，你的帖子将会被删除) <?php } ?>
 	<?php if($action=='newtopic' || $action=='newreply'){ ?>
-		<br>验证码: <?=showsecode()?><br>
+		<br>验证码: 
+<!--sub:common/seccheck-->
+<?php $tpl_sec_url=$_G['config']['bburl'].'misc.php?mod=secode'; ?>
+<?php $tpl_sec_id='secode_'.rand(0,3276); ?>
+<?php if($_G['config']['secode']['type']==0 || $_G['config']['secode']['type']==2){ ?>
+	<input type="text" name="secode" id="secode" required>&nbsp;<img src="<?php echo $tpl_sec_url;?>" id="<?php echo $tpl_sec_id;?>">&nbsp;<a href="javascript:;" onclick="$('<?php echo $tpl_sec_id;?>').src='<?php echo $tpl_sec_url;?>&'+Math.random()">刷新验证码</a>
+
+<?php }else{ ?>
+	<input type="text" name="secode" id="secode" required>&nbsp;<audio type="audio/mpeg" src="<?php echo $tpl_sec_url;?>" id="<?php echo $tpl_sec_id;?>"></audio><a href="javascript:;" onclick="$('<?php echo $tpl_sec_id;?>').src='<?php echo $tpl_sec_url;?>&'+Math.random()">刷新验证码</a> <a href="javascript:;" onclick="$('<?php echo $tpl_sec_id;?>').play();">播放</a>
+<?php } ?>
+<!--endsub:common/seccheck-->
+<br>
 	<?php } ?>
 	<p class="center"><input type="submit" class="submitbtn" value="提交"></p>
 </form>

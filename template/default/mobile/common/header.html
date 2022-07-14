@@ -13,6 +13,7 @@
 		<script src="files/javascript/jquery_mobile/jquery.min.js"></script>
 		<script src="files/javascript/jquery_mobile/jquery.mobile-1.4.5.min.js"></script>
 		<script>
+		jQuery.mobile.ajaxEnabled=false;
 			jQuery.noConflict(true);
 			var IMGDIR="{IMGDIR}";
 			var SITEURL="{$_G['siteurl']}";
@@ -38,6 +39,7 @@
 					{/if}
 				</ul>
 			</div>
+			<div style="margin:5px;">
 			<a  href="./" data-role="none"><img src="{$_G['config']['bblogo']}" title="{$_G['config']['bbname']}" alt="{$_G['config']['bbname']}"></a>
 			<span class="atpicright">
 			{if !islogin()} {la welcomeguest} {else} {la welcomeuser} {$_G['user']['username']} <br> {la nowloca} {$navtitle}{/if}

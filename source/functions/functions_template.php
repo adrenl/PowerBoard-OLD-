@@ -66,11 +66,8 @@
 		$parse=preg_replace("/\{(\\\$[a-zA-Z0-9_\-\>\[\]\'\"\$\.\x7f-\xff]+)\}/s",'<?php echo \\1;?>',$parse);
 		$parse=str_replace('{IMGDIR}','files/imgs/common/',$parse);
 		$parse=str_replace('{BADLINK}','javascript:;',$parse);
-		$parse=preg_replace_callback('/\{SECODE\}/is',function($m) use($_G){
-			return str_replace($m[0],'<?=showsecode()?>',$m[0]);
-		},$parse);
 		//Parse end
-		file_put_contents($tplhtmltemppath,'<?php if(!defined(\'IN_POWERBOARD\')){die();}?>'.$parse);
+		file_put_contents($tplhtmltemppath,"<?php if(!defined('IN_POWERBOARD')){die();}?>".$parse);
 		touch($tplhtmltemppath,filemtime($tplhtmlpath));
 		return $tplhtmltemppath;
 	}

@@ -92,7 +92,7 @@
 		'e_savedata'=>'保存内容',
 		'e_loaddata'=>'恢复内容',
 		'e_auto'=>'自动',
-		'e_selectattachment'=>'选择附件：',
+		'e_selectattachment'=>'选择附件',
 		'e_uploaded'=>'已上传附件',
 		'aid'=>'附件ID(AID)',
 		'e_filename'=>'文件名',

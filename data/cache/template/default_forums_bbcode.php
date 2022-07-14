@@ -61,7 +61,7 @@ function tpl_bb_attachment($data){
 	$size=sizecount($data['size']);
 	$isimg=$data['isimg'];
 	$aid=$data['aid'];
-	$add=!$aid?'附件不存在':'附件:<br><a href="forums.php?mod=ajaxupload&action=download&aid='.$aid.'">'.$name.'</a>'.($isimg?'<br><img data-src="forums.php?mod=ajaxupload&action=imgview&aid='.$aid.'" class="lazyload">':'');
+	$add=!$aid?'附件不存在':'附件:<a href="forums.php?mod=ajaxupload&action=download&aid='.$aid.'">'.$name.'</a> '.$size.($isimg?'<br><img data-src="forums.php?mod=ajaxupload&action=imgview&aid='.$aid.'" class="lazyload">':'');
  ?>
 <?php $return= <<<EOF
 <div class="attachment">$add</div> 

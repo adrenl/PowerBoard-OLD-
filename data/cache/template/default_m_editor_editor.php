@@ -14,10 +14,10 @@
 	</script>
 	<link rel="stylesheet" type="text/css" href="data/cache/template/css_default_editor.css">
 	<div id="editor_toolbar">
-		<select id="FontSet" onchange="code('font');selectgoto(this,0);"><option value="">字体</option></select>
-		<select id="SizeSet" onchange="code('size');selectgoto(this,0);"><option value="">字号</option></select>
-		<select id="ColorSet" onchange="code('tc');selectgoto(this,0);"><option value="">文字颜色</option></select>
-		<select id="BackColortSet" onchange="code('tbc');selectgoto(this,0);"><option value="">背景颜色</option></select>
+		<select id="FontSet" data-inline="true" data-mini="true" onchange="code('font');selectgoto(this,0);"><option value="">字体</option></select>
+		<select id="SizeSet" data-inline="true" data-mini="true" onchange="code('size');selectgoto(this,0);"><option value="">字号</option></select>
+		<select id="ColorSet" data-inline="true" data-mini="true" onchange="code('tc');selectgoto(this,0);"><option value="">文字颜色</option></select>
+		<select id="BackColortSet" data-inline="true" data-mini="true" onchange="code('tbc');selectgoto(this,0);"><option value="">背景颜色</option></select>
 		<a href="javascript:;" class="e_btn e_b" title="粗体">b</a>
 		<a href="javascript:;" class="e_btn e_i" title="斜体">i</a>
 		<a href="javascript:;" class="e_btn e_u" title="下划线">u</a>
@@ -44,24 +44,21 @@
 		<a href="javascript:;" class="e_btn e_code" title="代码">code</a>
 		<?php if($EDITOR['minimode']){ ?><span class="fright graytext" onclick="tominimode(false);this.style.display='none';"> 完整模式 </span><?php } ?>
 	</div>
-	<fieldset id="smilies_fieldset" style="display:none;">
+	<fieldset id="smilies_fieldset" style="display:none;padding:3px;" class="ui-content ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
 		<legend>表情</legend>
 		<span style="float:left;cursor:pointer;" onclick="$('smilies_fieldset').style.display='none'">[X]</span>
 	</fieldset>
 	<?php if($EDITOR['useattachment']){ ?>
-	<fieldset id="attachment_fieldset" style="display:none;">
+	<fieldset id="attachment_fieldset" style="display:none;padding:3px;" class="ui-content ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
 		<legend>附件</legend>
 		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span>
-		<!--<div id="attachmentdiv">
-			
-		</div>-->
 		<table border="1" style="width:100%" id="attachmentlist">
 			<tr>
 				<th style="width:90px;">附件ID(AID)</th>
 				<th>文件名</th>
-				<th style="width:100px;">操作</th>
+				<th style="width:140px;">操作</th>
 			</tr>
-			<tr><td colspan="3">选择附件：<input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
+			<tr><td colspan="3"><label for="newinsert">选择附件</label><input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
 		</table>
 	</fieldset>
 	<?php } ?>
@@ -69,9 +66,9 @@
 	<textarea id="editor_data" name="editor_content" style="display:none;"></textarea>
 	<input type="hidden" name="editor_useattachment" id="editor_useattachment" value="">
 	<div id="editor_bottombar">
-		<a href="javascript:;" onclick="savedata()">保存内容</a>(<input type="checkbox" id="autosave" onclick="autosavecheck();" checked>自动)
+		<a href="javascript:;" onclick="savedata()">保存内容</a>(<input type="checkbox" data-role="none" id="autosave" onclick="autosavecheck();" checked>自动)
 		<a href="javascript:;" onclick="loaddata()">恢复内容</a>
-		<span style="float:right;" class="graytext"><span id="counttext"></span> <span id="bottom_msg"></span></span>
+		<span style="display:inline-block;" class="graytext"><span id="counttext"></span> <span id="bottom_msg"></span></span>
 	</div>
 	<script src="data/cache/smilies_var.js"></script>
 	<script src="files/javascript/editor.js"></script>

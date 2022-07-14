@@ -53,7 +53,7 @@
 			msg('post_reply_new_success',"forums.php?mod=view&arid={$arid}&fid={$fid}&pid={$pid}#f".$index2['lastfloor']);
 		}
 	}
-	function editpost($arid,$fid,$title,$content,$by,$pid,$floor=1,$readlevel=0,$disable_bbcode=0,$disable_smilies=0,$delete_post=0){  //$floor==1 topic ; $floor>1 reply
+	function editpost($arid,$fid,$title,$content,$by,$pid,$floor=1,$readlevel=0,$disable_bbcode=0,$disable_smilies=0,$delete_post=0,$useattachment=array()){  //$floor==1 topic ; $floor>1 reply
 		$file=POWERBOARD_ROOT."data/forums/{$arid}/{$fid}/{$pid}/{$floor}.php";
 		if(!file_exists($file)) msg('post_no_exists');
 		if($delete_post==1){
@@ -63,9 +63,9 @@
 		$post=getpost($arid,$fid,$pid,$floor);
 		checkpost($title,$content,$floor);
 		if($floor==1){
-			writeindex($file,array('by'=>$post['by'],'title'=>$title,'content'=>$content,'sendtime'=>$post['sendtime'],'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies));
+			writeindex($file,array('by'=>$post['by'],'title'=>$title,'content'=>$content,'sendtime'=>$post['sendtime'],'readlevel'=>$readlevel,'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies,'useattachment'=>$useattachment));
 		}else{
-			writeindex($file,array('by'=>$post['by'],'title'=>$title,'content'=>$content,'sendtime'=>$post['sendtime'],'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies));
+			writeindex($file,array('by'=>$post['by'],'title'=>$title,'content'=>$content,'sendtime'=>$post['sendtime'],'disable_bbcode'=>$disable_bbcode,'disable_smilies'=>$disable_smilies,'useattachment'=>$useattachment));
 		}
 		msg('post_post_edit_success',"forums.php?mod=view&arid={$arid}&fid={$fid}&pid={$pid}");
 	}

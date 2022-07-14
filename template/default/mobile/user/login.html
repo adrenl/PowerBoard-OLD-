@@ -1,17 +1,19 @@
 {template common/header}
 <form method="post" action="user.php?mod=login&submit=yes" data-ajax="false">
-	<div class="ui-field-contain">
-		<select name="howlogin" data-role="none"><option value="false">{la username}</option><option value="true">{la uid}</option></select>:<input type="text" name="username" id="username"  data-role="none" required><br>
-		<label for="password">{la password}:</label><input type="password" name="password" id="password" required><br>
-		<label for="cookietime">{la cookie_time}:</label><select name="cookietime" id="cookietime">
+	<div>
+		<select name="howlogin" data-mini="true"><option value="false">{la username}</option><option value="true">{la uid}</option></select><input type="text" name="username" id="username"  required><br>
+		<label for="password">{la password}</label><input type="password" name="password" id="password" required><br>
+		<label for="cookietime">{la cookie_time}</label>
+		<select name="cookietime" id="cookietime">
 			<option  value="3153600000">{la permanent}</option>
 			<option  value="2592000">{la 1monent}</option>
 			<option  value="86400">{la 1day}</option>
 			<option  value="3600">{la 1hour}</option>
 			<option  value="0">{la notime}</option>
 		</select>
-		{la secode}: {SECODE}
-		<input type="submit" class="submitbtn" value="{la login}">&nbsp;<input type="reset" value="{la reset}">
+		<label for="secode">{la secode}</label> {subtemplate common/seccheck}
+		<input type="submit" class="submitbtn" value="{la login}">
+		<input type="reset" value="{la reset}">
 	</div>
 </form>
 {template common/footer}

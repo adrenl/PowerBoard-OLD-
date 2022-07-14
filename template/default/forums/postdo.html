@@ -13,7 +13,7 @@
 	{if $action!='newreply'}&nbsp;{la post_e_readlevel} <input type="number" name="readlevel" min="0" class="wnunberi" value="{$post['readlevel']}">{/if}
 	{if $action=='editpost'}<br><input type="checkbox" name="delete_post" value="1">{la post_delete} ({la post_delete_msg}) {/if}
 	{if $action=='newtopic' || $action=='newreply'}
-		<br>{la secode}: {SECODE}<br>
+		<br>{la secode}: {subtemplate common/seccheck}<br>
 	{/if}
 	<p class="center"><input type="submit" class="submitbtn" value="{la submit}"></p>
 </form>

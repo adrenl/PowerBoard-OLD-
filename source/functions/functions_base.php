@@ -103,22 +103,8 @@
 		}
 		return $return.'</table>';
 	}
-	function sr(){	
-		return 'r_'.time().rand(0,666).rand(0,123)*5;
-	}
 	function islogin(){
 		return isset($_SESSION['uid'])?true:false;
-	}
-	function showsecode(){
-		global $_G;
-		$id=sr();
-		$url=$_G['config']['bburl'].'misc.php?mod=secode';
-		if($_G['config']['secode']['type']==0 || $_G['config']['secode']['type']==2){
-			$return='<input type="text" name="secode" required>&nbsp;<img src="'.$url.'" id="'.$id.'">&nbsp;<a href="javascript:void(0);" onclick="$(\''.$id.'\').src=\''.$url.'&r=\'+Math.random()">'.lang('common','refresh_secode').'</a>';
-		}elseif($_G['config']['secode']['type']==1){
-			$return='<input type="text" name="secode" required>&nbsp;<audio type="audio/mpeg" src="'.$url.'" id="'.$id.'"></audio>&nbsp;<a href="javascript:void(0);" onclick="$(\''.$id.'\').src=\''.$url.'&r=\'+Math.random()">'.lang('common','refresh_secode').'</a> <a href="javascript:void(0);" onclick="$(\''.$id.'\').play();">'.lang('common','play').'</a>';
-		}
-		return $return;
 	}
 	function msg($message,$url='',$replace=array(),$options=array()){
 		global $_G,$navtitle;

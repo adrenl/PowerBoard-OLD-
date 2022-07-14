@@ -61,7 +61,7 @@
 				<th>文件名</th>
 				<th style="width:100px;">操作</th>
 			</tr>
-			<tr><td colspan="3">选择附件：<input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
+			<tr><td colspan="3">选择附件<input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
 		</table>
 	</fieldset>
 	<?php } ?>

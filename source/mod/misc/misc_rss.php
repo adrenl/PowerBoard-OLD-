@@ -20,7 +20,7 @@
 	}else{
 		$icount=$index['totaltopic']-$_G['rss']['msg_count'];
 	}
-	for($i=$index['totaltopic'];$i>=($icount-1);--$i){
+	for($i=$index['totaltopic'];$i>0;--$i){
 		$p=getpost($arid,$fid,$i,1,false);
 		$rss.="
    <item>

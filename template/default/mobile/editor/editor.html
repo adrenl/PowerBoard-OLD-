@@ -1,0 +1,75 @@
+<div id="editor">
+	{eval $EDITOR['minlength']=isset($EDITOR['minlength'])?$EDITOR['minlength']:10;}
+	{eval $EDITOR['maxlength']=isset($EDITOR['maxlength'])?$EDITOR['maxlength']:1000;}
+	{eval $EDITOR['minimode']=isset($EDITOR['minimode'])?$EDITOR['minimode']:0;}
+	{eval $EDITOR['useattachment']=isset($EDITOR['useattachment'])?$EDITOR['useattachment']:1;}
+	{eval $EDITOR['content']=isset($EDITOR['content'])?$EDITOR['content']:'';}
+	{eval $EDITOR['attachmentlist']=isset($EDITOR['attachmentlist'])?$EDITOR['attachmentlist']:null;}
+	<script>
+		var e_minlength={$EDITOR['minlength']};
+		var e_maxlength={$EDITOR['maxlength']};
+		var e_minimode={$EDITOR['minimode']};
+		var e_useattachment={$EDITOR['useattachment']};
+		var e_original_attach={out $EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"};
+	</script>
+	<link rel="stylesheet" type="text/css" href="{css editor}">
+	<div id="editor_toolbar">
+		<select id="FontSet" data-inline="true" data-mini="true" onchange="code('font');selectgoto(this,0);"><option value="">{la e_font}</option></select>
+		<select id="SizeSet" data-inline="true" data-mini="true" onchange="code('size');selectgoto(this,0);"><option value="">{la e_size}</option></select>
+		<select id="ColorSet" data-inline="true" data-mini="true" onchange="code('tc');selectgoto(this,0);"><option value="">{la e_tc}</option></select>
+		<select id="BackColortSet" data-inline="true" data-mini="true" onchange="code('tbc');selectgoto(this,0);"><option value="">{la e_tbc}</option></select>
+		<a href="{BADLINK}" class="e_btn e_b" title="{la e_bold}">b</a>
+		<a href="{BADLINK}" class="e_btn e_i" title="{la e_i}">i</a>
+		<a href="{BADLINK}" class="e_btn e_u" title="{la e_u}">u</a>
+		<a href="{BADLINK}" class="e_btn e_d" title="{la e_d}">d</a>
+		<a href="{BADLINK}" class="e_btn e_alignleft" title="{la e_alignleft}">al</a>
+		<a href="{BADLINK}" class="e_btn e_aligncenter" title="{la e_aligncenter}")>ac</a>
+		<a href="{BADLINK}" class="e_btn e_alignright" title="{la e_alignright}">ar</a>
+		<a href="{BADLINK}" class="e_btn e_floatleft" title="{la e_floatleft}">fl</a>
+		<a href="{BADLINK}" class="e_btn e_floatright" title="{la e_floatright}">fr</a>
+		<a href="{BADLINK}" class="e_btn e_ul" title="{la e_ul}">ul</a>
+		<a href="{BADLINK}" class="e_btn e_ol" title="{la e_ol}">ol</a>
+		<a href="{BADLINK}" class="e_btn e_link" title="{la e_link}">link</a>
+		<a href="{BADLINK}" class="e_btn e_table" title="{la e_table}">table</a>
+		<a href="{BADLINK}" class="e_btn e_hr" title="{la e_hr}">hr</a>
+		<a href="{BADLINK}" class="e_btn e_smilies" title="{la e_smilies}">smilies</a>
+		<a href="{BADLINK}" class="e_btn e_img" title="{la e_img}">img</a>
+		<a href="{BADLINK}" class="e_btn e_video" title="{la e_video}">video</a>
+		<a href="{BADLINK}" class="e_btn e_audio" title="{la e_audio}">audio</a>
+		{if $EDITOR['useattachment']}<a href="{BADLINK}" class="e_btn e_attachment" title=" {la attachment} ">attachment</a>{/if}
+		<a href="{BADLINK}" class="e_btn e_sup" title="{la e_sup}">sup</a>
+		<a href="{BADLINK}" class="e_btn e_sub" title="{la e_sub}">sub</a>
+		<a href="{BADLINK}" class="e_btn e_quote" title="{la e_qutoe}">quote</a>
+		<a href="{BADLINK}" class="e_btn e_marquee" title="{la e_marquee}">marquee</a>
+		<a href="{BADLINK}" class="e_btn e_code" title="{la e_code}">code</a>
+		{if $EDITOR['minimode']}<span class="fright graytext" onclick="tominimode(false);this.style.display='none';"> {la e_fullmode} </span>{/if}
+	</div>
+	<fieldset id="smilies_fieldset" style="display:none;padding:3px;" class="ui-content ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
+		<legend>{la e_smilies}</legend>
+		<span style="float:left;cursor:pointer;" onclick="$('smilies_fieldset').style.display='none'">[X]</span>
+	</fieldset>
+	{if $EDITOR['useattachment']}
+	<fieldset id="attachment_fieldset" style="display:none;padding:3px;" class="ui-content ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
+		<legend>{la attachment}</legend>
+		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span>
+		<table border="1" style="width:100%" id="attachmentlist">
+			<tr>
+				<th style="width:90px;">{la aid}</th>
+				<th>{la e_filename}</th>
+				<th style="width:140px;">{la thedo}</th>
+			</tr>
+			<tr><td colspan="3"><label for="newinsert">{la e_selectattachment}</label><input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
+		</table>
+	</fieldset>
+	{/if}
+	<textarea id="editor_textarea" name="editor_textarea">{$EDITOR['content']}</textarea>
+	<textarea id="editor_data" name="editor_content" style="display:none;"></textarea>
+	<input type="hidden" name="editor_useattachment" id="editor_useattachment" value="">
+	<div id="editor_bottombar">
+		<a href="{BADLINK}" onclick="savedata()">{la e_savedata}</a>(<input type="checkbox" data-role="none" id="autosave" onclick="autosavecheck();" checked>{la e_auto})
+		<a href="{BADLINK}" onclick="loaddata()">{la e_loaddata}</a>
+		<span style="display:inline-block;" class="graytext"><span id="counttext"></span> <span id="bottom_msg"></span></span>
+	</div>
+	<script src="data/cache/smilies_var.js"></script>
+	<script src="files/javascript/editor.js"></script>
+</div>

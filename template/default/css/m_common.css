@@ -1,7 +1,7 @@
 .dialog{
 	height:auto;
 	border:5px solid #646464;
-	background-color:#FFF;
+	background-color:#f9f9f9;
 	position:fixed;
 	padding:4px;
 	top:5px;
@@ -59,6 +59,11 @@ table{
 	border:1px solid #CCC;
 	background-color:#f9f9f9;
 	margin:5px 5px;
+}
+.rq:before{
+	color:red;
+	content:"*";
+	font-style:normal;
 }
 .fleft{
 	float:left;

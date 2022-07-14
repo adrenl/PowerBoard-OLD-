@@ -12,7 +12,6 @@ var smload=false;
 var timer=0;
 var Colors=new Array('#000000','#800000','#008000','#000080','#800080','#008080','#808080','#C0C0C0','#FF0000','#00FF00','#FFFF00','#0000FF','#FF00FF','#00FFFF','#FFC0CB','#D9D919','#4F4F2F','#856363','#215E21','#FF6EC7','#CC3299','#A67D3D','#CD7F32','#32CD99','#FF7F00','#38B0DE','#EBC79E','#FFFFFF');
 var useattachment=new Array();
-
 window.onload=function(){
 	var FontE=$('FontSet');
 	for(var i=0;i<Fonts.length;i++){
@@ -40,9 +39,33 @@ window.onload=function(){
 editort.onkeyup=function(){
 	$('counttext').innerHTML="[字数："+editort.value.length+" 字|系统限制："+e_minlength+"~"+e_maxlength+" 字]"
 }
-function insert(insert){
-	editort.value+=insert;
-	editort.focus();
+function insert(myValue){
+	var myField=editor_textarea;
+    //IE support
+    if (document.selection){
+        myField.focus();
+        sel=document.selection.createRange();
+        sel.text=myValue;
+        sel.select();
+    }
+    //MOZILLA/NETSCAPE support
+    else if (myField.selectionStart || myField.selectionStart=='0'){
+        var startPos=myField.selectionStart;
+        var endPos=myField.selectionEnd;
+        // save scrollTop before insert
+        var restoreTop=myField.scrollTop;
+        myField.value= myField.value.substring(0,startPos)+myValue+myField.value.substring(endPos,myField.value.length);
+        if (restoreTop>0){
+			myField.scrollTop=restoreTop;
+        }
+        myField.focus();
+        myField.selectionStart=startPos+myValue.length;
+		myField.selectionEnd=startPos+myValue.length;
+	}else{
+		myField.value+=myValue;
+        myField.focus();
+    }
+	//editort.focus();
 	editort.onkeyup();
 }
 function code(type,arg){
@@ -156,8 +179,10 @@ function code(type,arg){
 		if(e_original_attach!=null){
 			for(var key in e_original_attach){
 				insert_to_attach_table(key,e_original_attach[key]);
+				useattachment.push(parseInt(key));
 			}
 			e_original_attach=null;
+			$("editor_useattachment").value=JSON.stringify(useattachment);
 		}
 	}else if(type=='sup'){
 		dialog('<input type="text" id="v1">','confirm','输入上标文本',function(){insert('[sup]'+$('v1').value+'[/sup]');});
@@ -254,7 +279,7 @@ function insert_to_attach_table(c1,c2,c3){
 	newcell3.id=newcell3id;
 	newcell1.innerHTML=c1;
 	newcell2.innerHTML=c2;
-	newcell3.innerHTML=c3?c3:"<input type='button' value='插入' onclick='insert(\"[attach]"+c1+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+c3+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>";
+	newcell3.innerHTML=c3?c3:"<input type='button' value='插入' onclick='insert(\"[attach]"+c1+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+c1+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+c1+",this.parentNode.parentNode.cells[1].id)'>";
 	return [newcell1id,newcell2id,newcell3id];
 }
 function attachmentinput(){
@@ -266,7 +291,7 @@ function attachmentinput(){
 		if(uploadajax.status==200 && uploadajax.readyState==4){
 			var aid=uploadajax.responseText;
 			$(ids[0]).innerHTML=aid;
-			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'>";
+			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+c3+"),this.parentNode.parentNode.cells[1].id'>";
 			useattachment.push(parseInt(aid));
 			$("editor_useattachment").value=JSON.stringify(useattachment);
 		}
@@ -286,6 +311,32 @@ function deleteattachment(aid){
 		useattachment.remove(parseInt(aid));
 		$("editor_useattachment").value=JSON.stringify(useattachment);
 	});
+}
+function updata_attachment(aid,changeid){
+	dialog('<input type="file" id="updata_attachment_input"><span style="display:none;" id="updata_attachment_span">即将上传...</span>','message',null,null,null,"取消",null);
+	$("updata_attachment_input").onchange=function(){
+		var uai=$("updata_attachment_input");
+		var uas=$("updata_attachment_span");
+		uai.hidden=true;
+		uas.style.display="inline";
+		dialog_confirm.hidden=true;
+		dialog_cancal_XX.hidden=true;
+		var uploadajax=newXmlHttp();
+		uploadajax.onreadystatechange=function(){
+			if(uploadajax.status==200 && uploadajax.readyState==4){
+				$(changeid).innerHTML=getFileName(uai.value);
+				uas.innerHTML="上传成功";
+				setTimeout('$("dialogbg").parentNode.removeChild($("dialogbg"));',2000);
+			}
+		}
+		uploadajax.upload.onprogress=function(up){
+			uas.innerHTML="上传中 "+Math.floor((up.loaded / up.total) * 100) + "%";
+		}
+		var uploadform=new FormData();
+		uploadform.append('attachment[]',uai.files[0]);
+		uploadajax.open("post", "forums.php?mod=ajaxupload&action=updata&aid="+aid);
+		uploadajax.send(uploadform);
+	}
 }
 function oneditorsubmit(){
 	var smtc=editort.value;

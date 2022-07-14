@@ -1,5 +1,5 @@
 function postcheck(title,content,tmaxlen,tminlen,cmaxlen,cminlen){
-	if(action=='newtopic' || floor==1){
+	if(action=='newtopic' || (action=='editpost' && floor==1)){
 		if(title.length<tminlen || title.length>tmaxlen){
 			dialog("标题字数小于 "+tminlen+" 字或大于 "+tmaxlen+" 字，请返回修改");
 			return false;
