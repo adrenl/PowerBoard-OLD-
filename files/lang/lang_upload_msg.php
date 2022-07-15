@@ -16,7 +16,7 @@
 		'upload_err_sys_8'=>'php 扩展程序停止了文件上传，php 无法提供确定哪个扩展导致文件上传停止',
 		'upload_err_usr_9'=>'非法上传文件',
 		'upload_err_usr_10'=>'上传的文件大小太大',
-		'upload_err_usr_11'=>'文件格式不正确',
+		'upload_err_usr_11'=>'不允许的文件格式',
 		'upload_err_usr_12'=>'今日上传附件数量过多',
 		'upload_err_-999'=>'未知上传错误',
 	);

@@ -11,6 +11,8 @@
 		var e_minimode=<?php echo $EDITOR['minimode'];?>;
 		var e_useattachment=<?php echo $EDITOR['useattachment'];?>;
 		var e_original_attach=<?php echo $EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"?>;
+		var e_attach_canfiletype="<?php echo implode('|',$_G['config']['file']['attachment']['file_type'])?>";
+		var e_attach_maxsize=<?php echo $_G['config']['file']['attachment']['max_size'];?>;
 	</script>
 	<link rel="stylesheet" type="text/css" href="data/cache/template/css_default_editor.css">
 	<div id="editor_toolbar">
@@ -51,18 +53,12 @@
 	<?php if($EDITOR['useattachment']){ ?>
 	<fieldset id="attachment_fieldset" style="display:none;">
 		<legend>附件</legend>
-		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span>
-		<!--<div id="attachmentdiv">
-			
-		</div>-->
-		<table border="1" style="width:100%" id="attachmentlist">
-			<tr>
-				<th style="width:90px;">附件ID(AID)</th>
-				<th>文件名</th>
-				<th style="width:100px;">操作</th>
-			</tr>
-			<tr><td colspan="3">选择附件<input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
-		</table>
+		<span style="float:left;cursor:pointer;" onclick="$('attachment_fieldset').style.display='none'">[X]</span><br>
+		<label for="newinsert">选择附件</label><input type="file" id="newinsert" onchange="attachmentinput()" value="">
+		<br>
+		<div id="attachmentlist">
+		</div>
+		<br>
 		最大文件大小: <?php echo sizecount($_G['config']['file']['attachment']['max_size'])?><br>
 		允许的文件类型: <?php echo implode(',',$_G['config']['file']['attachment']['file_type'])?>
 		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_G['config']['file']['attachment']['max_size'];?>">

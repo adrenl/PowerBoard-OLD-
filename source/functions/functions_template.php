@@ -23,7 +23,7 @@
 			}
 		}
 		if(file_exists($tplhtmltemppath) && filemtime($tplhtmltemppath)==filemtime($tplhtmlpath)){
-		//	return $tplhtmltemppath;
+			return $tplhtmltemppath;
 		}
 		$parse=file_get_contents($tplhtmlpath);
 		//Parse start
@@ -77,7 +77,7 @@
 		$tplcsspath="{$tplpath}css/{$cssname}.css";
 		$tplcsstemppath="data/cache/template/css_{$tplid}_{$cssname}.css";
 		if(file_exists($tplcsstemppath) && filemtime($tplcsstemppath)==filemtime($tplcsspath)){
-		//	return $tplcsstemppath;
+			return $tplcsstemppath;
 		}
 		$parse=file_get_contents($tplcsspath);
 		//Parse start

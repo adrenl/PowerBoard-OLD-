@@ -103,7 +103,7 @@
 		),
 		'attachment' => 
 		array (
-		  'max_size' =>48609326,
+		  'max_size' =>15472802,
 		  'file_type' => 
 		  array (
 			0 => 'txt',
@@ -128,7 +128,7 @@
 			19=>'wav',
 			20=>'svg',
 		  ),
-		  'image_watermark_status' => 9,
+		  'image_watermark_status' => 3,
 		),
 	  ),
 	  'extcredits' => 

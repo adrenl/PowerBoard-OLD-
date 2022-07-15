@@ -176,9 +176,9 @@ function code(type,arg){
 	}else if(type=='attachment'){
 		if(e_useattachment==0) return;
 		switchdisplay("attachment_fieldset");
-		if(e_original_attach!=null){
+		if(typeof e_original_attach=="object" && e_original_attach!=null){
 			for(var key in e_original_attach){
-				insert_to_attach_table(key,e_original_attach[key]);
+				insert_to_attach_list(key,e_original_attach[key]);
 				useattachment.push(parseInt(key));
 			}
 			e_original_attach=null;
@@ -264,45 +264,53 @@ function tominimode(mode){
 		$("BackColortSet").style.display="inline-block";
 	}
 }
-function insert_to_attach_table(c1,c2,c3){
+function insert_to_attach_list(aid,filename){
 	if(e_useattachment==0) return;
-	var table=$("attachmentlist");
-	var newcell1id='ATTACHMENT1_'+Math.random();
-	var newcell2id='ATTACHMENT2_'+Math.random();
-	var newcell3id='ATTACHMENT3_'+Math.random();
-	var newrow=table.insertRow();
-	var newcell1=newrow.insertCell();
-	var newcell2=newrow.insertCell();
-	var newcell3=newrow.insertCell();
-	newcell1.id=newcell1id;
-	newcell2.id=newcell2id;
-	newcell3.id=newcell3id;
-	newcell1.innerHTML=c1;
-	newcell2.innerHTML=c2;
-	newcell3.innerHTML=c3?c3:"<input type='button' value='插入' onclick='insert(\"[attach]"+c1+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+c1+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+c1+",this.parentNode.parentNode.cells[1].id)'>";
-	return [newcell1id,newcell2id,newcell3id];
+	var al=$("attachmentlist");
+	var new_attach_div=document.createElement("div");
+	var new_attach_div_id='attachdiv_'+Math.random()+Math.random();
+	var new_attach_filename_s_id='attach_filename_'+Math.random();
+	var new_attach_do_s_id='attach_do_'+Math.random();
+	new_attach_div.id=new_attach_div_id;
+	new_attach_div.innerHTML='<span id="'+new_attach_do_s_id+'">'+(isNaN(aid)==true?aid:'<a href="javascript:;" onclick="insert(\'[attach]'+aid+'[/attach]\')">[插入]</a><a href="javascript:;" onclick="deleteattachment('+aid+');this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">[删除]</a><a href="javascript:;" onclick="updata_attachment('+aid+',\''+new_attach_filename_s_id+'\')">[更新]</a></span>')+'</span>&nbsp;&nbsp;<span id="'+new_attach_filename_s_id+'">'+filename+'</span>';
+	al.appendChild(new_attach_div);
+	return [new_attach_do_s_id,new_attach_filename_s_id];
+}
+function attachmentcheck(filename,size){
+	if(new RegExp("\.("+e_attach_canfiletype+")$","i").test(filename)==false){
+		dialog("不允许的文件格式");
+		return 1;
+	}
+	if(size>e_attach_maxsize){
+		dialog("上传的文件大小太大");
+		return 2;
+	}
+	return 0;
 }
 function attachmentinput(){
 	if(e_useattachment==0) return;
 	var willupload=$('newinsert');
+	if(attachmentcheck(willupload.value,willupload.files[0].size)!=0) return;
 	var uploadajax=newXmlHttp();
-	var ids=insert_to_attach_table("",getFileName(willupload.value),"即将上传...");
+	var ids=insert_to_attach_list("即将上传...",getFileName(willupload.value));
 	uploadajax.onreadystatechange=function(){
-		if(uploadajax.status==200 && uploadajax.readyState==4){
-			var aid=uploadajax.responseText;
-			if(/^\d+$/.test(aid)==false){
-				$(ids[2]).innerHTML="上传错误："+aid;
-				$(ids[0]).innerHTML='<input type="button" value="取消" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">'
-				return;
+		if(uploadajax.readyState==4){
+			if(uploadajax.status==200){
+				var aid=uploadajax.responseText;
+				if(/^\d+$/.test(aid)==false){
+					$(ids[0]).innerHTML='<a href="javascript:;" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">[删除]</a> 上传错误：'+aid;
+					return;
+				}
+				$(ids[0]).innerHTML='<a href="javascript:;" onclick="insert(\'[attach]'+aid+'[/attach]\')">[插入]</a><a href="javascript:;" onclick="deleteattachment('+aid+');this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">[删除]</a><a href="javascript:;" onclick="updata_attachment('+aid+',\''+ids[1]+'\')">[更新]</a></span>';
+				useattachment.push(parseInt(aid));
+				$("editor_useattachment").value=JSON.stringify(useattachment);
+			}else{
+				$(ids[0]).innerHTML='<a href="javascript:;" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">[删除]</a> 上传错误，返回的 HTTP 状态码：'+uploadajax.status;
 			}
-			$(ids[0]).innerHTML=aid;
-			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+aid+"),this.parentNode.parentNode.cells[1].id'>";
-			useattachment.push(parseInt(aid));
-			$("editor_useattachment").value=JSON.stringify(useattachment);
 		}
     }
 	uploadajax.upload.onprogress=function(up){
-        $(ids[2]).innerHTML=Math.floor((up.loaded / up.total) * 100) + "%";
+        $(ids[0]).innerHTML=Math.floor((up.loaded / up.total) * 100) + "%";
 	}
 	var uploadform=new FormData();
 	uploadform.append('attachment[]',willupload.files[0]);
@@ -321,6 +329,7 @@ function updata_attachment(aid,changeid){
 	dialog('<input type="file" id="updata_attachment_input"><span style="display:none;" id="updata_attachment_span">即将上传...</span>','message',null,null,null,"取消",null);
 	$("updata_attachment_input").onchange=function(){
 		var uai=$("updata_attachment_input");
+		if(attachmentcheck(updata_attachment_input.value,updata_attachment_input.files[0].size)!=0) return;
 		var uas=$("updata_attachment_span");
 		uai.hidden=true;
 		uas.style.display="inline";
@@ -328,9 +337,18 @@ function updata_attachment(aid,changeid){
 		dialog_cancal_XX.hidden=true;
 		var uploadajax=newXmlHttp();
 		uploadajax.onreadystatechange=function(){
-			if(uploadajax.status==200 && uploadajax.readyState==4){
-				$(changeid).innerHTML=getFileName(uai.value);
-				uas.innerHTML="上传成功";
+			if(uploadajax.readyState==4){
+				if(uploadajax.status==200){
+					var aid=uploadajax.responseText;
+					if(/^\d+$/.test(aid)==false){
+						uas.innerHTML="上传错误："+aid;
+					}else{
+						$(changeid).innerHTML=getFileName(uai.value);
+						uas.innerHTML="上传成功";
+					}
+				}else{
+					uas.innerHTML="上传错误，返回的 HTTP 状态码："+uploadajax.status;
+				}
 				setTimeout('$("dialogbg").parentNode.removeChild($("dialogbg"));',2000);
 			}
 		}

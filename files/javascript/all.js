@@ -187,6 +187,12 @@ function switchdisplay(id){
 function selectgoto(e,index){
 	e.options[index].selected=true;
 }
+Array.prototype.remove=function(val){ 
+    var index=this.indexOf(val);
+    if(index>-1){
+        this.splice(index, 1);
+    }
+}
 Date.prototype.format=function(fmt){
 	var o={
 		"M+":this.getMonth()+1,                 //月份
@@ -208,12 +214,6 @@ Date.prototype.format=function(fmt){
 		}       
 	}
 	return fmt;
-}
-Array.prototype.remove=function(val){ 
-    var index=this.indexOf(val);
-    if(index>-1){
-        this.splice(index, 1);
-    }
 }
 function replaceAll_(v1,v2,v3){
 	var regexp=new RegExp(v1,"g");

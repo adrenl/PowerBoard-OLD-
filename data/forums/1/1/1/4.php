@@ -1,5 +1,5 @@
 <?php die();?>
-a:6:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:281:"[audio]http://localhost/testaudio/dog.ogg[/audio]
+a:7:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:281:"[audio]http://localhost/testaudio/dog.ogg[/audio]
 [video=400,400]http://localhost/gb.mp4[/video]
 {13}
 [hr/]
@@ -19,4 +19,4 @@ a:6:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:0:"";s:7:"content";s:281:"[audio]htt
 [td]8[/td]
 [td]9[/td]
 [/tr]
-[/table]";s:8:"sendtime";i:1657590974;s:14:"disable_bbcode";N;s:15:"disable_smilies";N;}
+[/table]";s:8:"sendtime";i:1657590974;s:14:"disable_bbcode";N;s:15:"disable_smilies";N;s:13:"useattachment";a:1:{i:0;i:12;}}

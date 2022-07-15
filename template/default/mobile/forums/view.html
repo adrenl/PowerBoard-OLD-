@@ -1,27 +1,4 @@
 {template common/header}
-
-<!--<div class="div_father">
-	<div class="div_title">{la topic} - {$floors['f']['1']['title']}</div>
-	<div class="div_content" style="padding:0;">
-		{foreach $floors['f'] $floor $data}
-			<div class="pcolumn_l">
-				{avatar $data['profile']['uid']} <i class="fright graytext">#{$floor}</i><br>
-				{la by}: {$data['by']}<br>
-				{la sendtime}: {date $data['sendtime']}
-				{if $data['profile']['uid']==$_G['user']['uid']}
-					<br>
-					<a href="forums.php?mod=postdo&action=editpost&arid={$arid}&fid={$fid}&pid={$pid}&floor={$floor}">{la post_edit}</a>
-				{/if}
-			</div>
-			<div class="pcolumn_r">
-				{if $data['title']}<b>{$data['title']}</b><br>{/if}
-				{$data['content']}
-			</div>
-			<hr class="aline">
-		{/foreach}
-		<p class="center"><a href="forums.php?mod=postdo&action=newreply&arid={$arid}&fid={$fid}&pid={$pid}&floor={$floor}"><button>{la newreply}</button></a></p>
-	</div>
-</div>-->
 {foreach $floors['f'] $floor $data}
 <div style="padding:4px;background-color:#FFFFFF;">
 	{if $data['title']}<h3>{$data['title']}</h3>{/if}
