@@ -5,6 +5,7 @@
 			session_start();
 			$this->init_vars();
 			$this->init_user();
+			set_error_handler(array($this,'init_error'));
 		}
 		public function init_vars(){
 			global $_G;
@@ -44,6 +45,29 @@
 					$_G['user']=$profile;
 				}
 			}
+		}
+		public function init_error($errno,$errstr,$errfile,$errline){
+			if($errno==8) return;
+			$level=array(2=>'WARNING',8=>'NOTICE',256=>'USER_ERROR',512=>'USER_WARNING',1024=>'USER_NOTICE',4096=>'RECOVERABLE_ERROR',8191=>'ALL');
+			$errcode=htmlspecialchars(file($errfile)[$errline-1]);
+			$echo= <<<EOF
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>PowerBoard System Error</title>
+	</head>
+	<body style="background-color:#0000FF;color:#FFFFFF;font-family:System;">
+		<ul>
+			<li>Error Level:$errno=>$level[$errno]</li>
+			<li>Message:$errstr</li>
+			<li>File:$errfile</li>
+			<li>Line:$errline</li>
+			<li>Code:$errcode</li>
+	</body>
+</html>
+EOF;
+			echo $echo;
+			die();
 		}
 		private function _get_script_url(){
 			if(!isset($this->var['PHP_SELF'])){

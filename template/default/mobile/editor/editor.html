@@ -60,6 +60,9 @@
 			</tr>
 			<tr><td colspan="3"><label for="newinsert">{la e_selectattachment}</label><input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
 		</table>
+		{la e_maxsize}: {out sizecount($_G['config']['file']['attachment']['max_size'])}<br>
+		{la e_canfiletype}: {out implode(',',$_G['config']['file']['attachment']['file_type'])}
+		<input type="hidden" name="MAX_FILE_SIZE" value="{$_G['config']['file']['attachment']['max_size']}">
 	</fieldset>
 	{/if}
 	<textarea id="editor_textarea" name="editor_textarea">{$EDITOR['content']}</textarea>

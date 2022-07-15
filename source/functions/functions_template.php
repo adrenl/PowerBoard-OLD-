@@ -49,7 +49,7 @@
 		$parse=preg_replace('/\{elseif\s+(.+?)\}/is','<?php }elseif(\\1){ ?>',$parse);
 		$parse=str_replace('{else}','<?php }else{ ?>',$parse);
 		$parse=str_replace('{/if}','<?php } ?>',$parse);
-		$parse=preg_replace('/\{out\s+(.+?)\}/is','<?=\\1?>',$parse);
+		$parse=preg_replace('/\{out\s+(.+?)\}/is','<?php echo \\1?>',$parse);
 		$parse=preg_replace_callback('/\{css\s+(.+?)\}/is',function($m) use($tplid){
 			$return=template_css_parse($tplid,$m[1]);
 			return str_replace($m[0],$return,$m[0]);

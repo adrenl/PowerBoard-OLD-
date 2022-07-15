@@ -2,7 +2,7 @@
 <form method="post" action="forums.php?mod=postdo&action=<?php echo $action;?>&arid=<?php echo $arid;?>&fid=<?php echo $fid;?>&pid=<?php echo $pid;?>&floor=<?php echo $floor;?>&submit=yes" onsubmit="return postcheck($('title').value,$('editor_textarea').value,<?php echo $_G['config']['post']['len']['title_max'];?>,<?php echo $_G['config']['post']['len']['title_min'];?>,<?php echo $_G['config']['post']['len']['content_max'];?>,<?php echo $_G['config']['post']['len']['content_min'];?>);" enctype="multipart/form-data">
 	<script src="files/javascript/post.js"></script>
 	<script>var action='<?php echo $action;?>';var floor='<?php echo $floor;?>';</script>
-	<span <?=$action=='newreply' || $floor>1  ?"style='display:none'":''?>> 标题:<input type="text" name="title" class="w95" id="title" value="<?php echo $post['title'];?>"></span>
+	<span <?php echo $action=='newreply' || $floor>1  ?"style='display:none'":''?>> 标题:<input type="text" name="title" class="w95" id="title" value="<?php echo $post['title'];?>"></span>
 	<?php $EDITOR['minlength']=$_G['config']['post']['len']['content_min']; ?>
 	<?php $EDITOR['maxlength']=$_G['config']['post']['len']['content_max']; ?>
 	<?php $EDITOR['content']=$post['content']; ?>

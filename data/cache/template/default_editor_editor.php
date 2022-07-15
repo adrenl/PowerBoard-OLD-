@@ -10,7 +10,7 @@
 		var e_maxlength=<?php echo $EDITOR['maxlength'];?>;
 		var e_minimode=<?php echo $EDITOR['minimode'];?>;
 		var e_useattachment=<?php echo $EDITOR['useattachment'];?>;
-		var e_original_attach=<?=$EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"?>;
+		var e_original_attach=<?php echo $EDITOR['attachmentlist']?"JSON.parse('".$EDITOR['attachmentlist']."')":"null"?>;
 	</script>
 	<link rel="stylesheet" type="text/css" href="data/cache/template/css_default_editor.css">
 	<div id="editor_toolbar">
@@ -63,6 +63,9 @@
 			</tr>
 			<tr><td colspan="3">选择附件<input type="file" id="newinsert" onchange="attachmentinput()" value=""></td></tr>
 		</table>
+		最大文件大小: <?php echo sizecount($_G['config']['file']['attachment']['max_size'])?><br>
+		允许的文件类型: <?php echo implode(',',$_G['config']['file']['attachment']['file_type'])?>
+		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo $_G['config']['file']['attachment']['max_size'];?>">
 	</fieldset>
 	<?php } ?>
 	<textarea id="editor_textarea" name="editor_textarea"><?php echo $EDITOR['content'];?></textarea>

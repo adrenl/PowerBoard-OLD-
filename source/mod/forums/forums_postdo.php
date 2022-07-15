@@ -42,7 +42,9 @@
 			$navtitle=lang('common','post_edit');
 			$post=getpost($arid,$fid,$pid,$floor,false);
 			$post['content']=htmlspecialchars_decode($post['content']);
-			$attachmentlist=@json_encode(@array_column(info_attachment($post['useattachment']),'name','aid'));
+			if($post['useattachment']){
+				$attachmentlist=@json_encode(@array_column(info_attachment($post['useattachment']),'name','aid'));
+			}
 		}elseif($action=='newreply'){
 			$navtitle=lang('common','newreply');
 		}

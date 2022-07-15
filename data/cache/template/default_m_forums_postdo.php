@@ -2,7 +2,7 @@
 <form method="post" action="forums.php?mod=postdo&action=<?php echo $action;?>&arid=<?php echo $arid;?>&fid=<?php echo $fid;?>&pid=<?php echo $pid;?>&floor=<?php echo $floor;?>&submit=yes" onsubmit="return postcheck($('title').value,$('editor_textarea').value,<?php echo $_G['config']['post']['len']['title_max'];?>,<?php echo $_G['config']['post']['len']['title_min'];?>,<?php echo $_G['config']['post']['len']['content_max'];?>,<?php echo $_G['config']['post']['len']['content_min'];?>);" enctype="multipart/form-data">
 	<script src="files/javascript/post.js"></script>
 	<script>var action='<?php echo $action;?>';var floor='<?php echo $floor;?>';</script>
-	<span <?=$action=='newreply' || $floor>1  ?"style='display:none'":''?>> <label for="title">标题</label><input type="text" name="title" id="title" value="<?php echo $post['title'];?>"></span>
+	<span <?php echo $action=='newreply' || $floor>1  ?"style='display:none'":''?>> <label for="title">标题</label><input type="text" name="title" id="title" value="<?php echo $post['title'];?>"></span>
 	<?php $EDITOR['minlength']=$_G['config']['post']['len']['content_min']; ?>
 	<?php $EDITOR['maxlength']=$_G['config']['post']['len']['content_max']; ?>
 	<?php $EDITOR['content']=$post['content']; ?>
@@ -11,9 +11,9 @@
 	<fieldset data-role="controlgroup" data-type="horizontal">
 		<label><input type="checkbox" name="disable_bbcode" value="1" <?php if($post['disable_bbcode']==1){ ?>checked<?php } ?>>禁用BBCode</label>
 		<label><input type="checkbox" name="disable_smilies" value="1" <?php if($post['disable_smilies']==1){ ?>checked<?php } ?>>禁用表情</label>
+		<?php if($action=='editpost'){ ?><label for="delete_post"><input type="checkbox" name="delete_post" id="delete_post" value="1">删除帖子 (勾选后并提交，你的帖子将会被删除)</label> <?php } ?>
 	</fieldset>
 	<?php if($action!='newreply'){ ?>&nbsp;阅读级别 <input type="number" name="readlevel" min="0" class="wnunberi" value="<?php echo $post['readlevel'];?>"><?php } ?>
-	<?php if($action=='editpost'){ ?><br><label for="delete_post"><input type="checkbox" name="delete_post" id="delete_post" value="1">删除帖子 (勾选后并提交，你的帖子将会被删除)</label> <?php } ?>
 	<?php if($action=='newtopic' || $action=='newreply'){ ?>
 		<label for="secode">验证码</label>
 <!--sub:common/seccheck-->

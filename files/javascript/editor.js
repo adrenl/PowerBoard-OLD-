@@ -290,8 +290,13 @@ function attachmentinput(){
 	uploadajax.onreadystatechange=function(){
 		if(uploadajax.status==200 && uploadajax.readyState==4){
 			var aid=uploadajax.responseText;
+			if(/^\d+$/.test(aid)==false){
+				$(ids[2]).innerHTML="上传错误："+aid;
+				$(ids[0]).innerHTML='<input type="button" value="取消" onclick="this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);">'
+				return;
+			}
 			$(ids[0]).innerHTML=aid;
-			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+c3+"),this.parentNode.parentNode.cells[1].id'>";
+			$(ids[2]).innerHTML="<input type='button' value='插入' onclick='insert(\"[attach]"+aid+"[/attach]\")'><input type='button' value='删除' onclick='deleteattachment("+aid+");this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);'><input type='button' value='更新' onclick='updata_attachment("+aid+"),this.parentNode.parentNode.cells[1].id'>";
 			useattachment.push(parseInt(aid));
 			$("editor_useattachment").value=JSON.stringify(useattachment);
 		}

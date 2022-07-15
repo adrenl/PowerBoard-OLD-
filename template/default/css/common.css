@@ -97,7 +97,6 @@ input[type="button"],input[type="reset"],input[type="submit"],input[type="color"
     border:1px outset #E8E8E8;
     background:#E8F3FD;
     cursor:pointer;
-	font-size:{PAGE_FONTSIZE};
 	width:auto;
 }
 input[type="button"]:active,input[type="reset"]:active,input[type="submit"]:active,button:active,input[type="color"]:active,select:active,input[type="file"]:active{
@@ -107,7 +106,6 @@ input[type="text"],input[type="email"],input[type="password"],input[type="number
 	border:1px inset black;
 	margin:2px;
 	font-size:12px;
-	font-size:{PAGE_FONTSIZE};
 }
 input[type="text"]:focus,input[type="email"]:focus,input[type="password"]:focus,input[type="number"]:focus,input[type="date"]:focus,textarea:focus{
 	outline:1px solid orange;

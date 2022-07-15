@@ -3,7 +3,7 @@
 {eval $thisforum=$thisarea['area'][$fid]}
 <a href="forums.php?mod=postdo&action=newtopic&arid={$arid}&fid={$fid}" class="ui-btn">{la newtopic}</a>
 <ul data-role="listview">
-	{if !@array_key_exists(1,$posts['p'])}
+	{if !$posts}
 		<p class="center">{la forum_nodata}</p>
 	{else}
 		{foreach $posts['p'] $pid $post}

@@ -12,7 +12,7 @@
 				<th style="width:15%">发布者</th>
 				<th style="width:15%">发布时间</th>
 			</tr>
-			<?php if(!@array_key_exists(1,$posts['p'])){ ?>
+			<?php if(!$posts){ ?>
 				<tr><td colspan="3" class="center">没有数据</td></tr>
 			<?php }else{ ?>
 				<?php if(is_array($posts['p'])){foreach($posts['p'] as $pid=>$post){ ?>

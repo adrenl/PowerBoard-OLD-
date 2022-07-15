@@ -95,6 +95,8 @@
 		'e_selectattachment'=>'选择附件',
 		'e_uploaded'=>'已上传附件',
 		'aid'=>'附件ID(AID)',
+		'e_canfiletype'=>'允许的文件类型',
+		'e_maxsize'=>'最大文件大小',
 		'e_filename'=>'文件名',
 		'e_font'=>'字体',
 		'e_size'=>'字号',

@@ -36,10 +36,10 @@
 				if(is_uploaded_file($files[$k]['tmp_name'])){
 					if($files[$k]['size']<$config['max_size']){
 						if(in_array(strtolower($extension),$config['file_type'])){
-							unlink($index[$aid]['file']);
 							$newname=$todir.md5($name.time().rand(0,255)).'.'.$extension;
 							move_uploaded_file($files[$k]['tmp_name'],$newname);
-							if($isupdata && $aid){
+							if($isupdata=true && $aid){
+								unlink($index[$aid]['file']);
 								$aid=intval($aid);
 								$index[$aid]=array(
 									'aid'=>$aid,
@@ -71,11 +71,17 @@
 								!$isupdata?$index[$index['lastaid']]['isimg']=true:$index[$aid]['isimg']=true;
 								watermark($newname,$config['image_watermark_status']);
 							}
+						}else{
+							return errordo_upload(11);
 						}
+					}else{
+						return errordo_upload(10);
 					}
+				}else{
+					return errordo_upload(9);
 				}
 			}else{
-				errordo_upload($files,$files['error']);
+				return errordo_upload($files[$k]['error']);
 			}
 		}
 		writeindex($todir.'index.php',$index);
@@ -177,13 +183,43 @@
 		fclose($fp);
 		return strpos($filecontent,chr(0x21).chr(0xff).chr(0x0b).'NETSCAPE2.0')===false?false:true;
 	}
-	function errordo_upload($files,$code){
+	function errordo_upload($code){
 		switch($code){
 			case 1:
+				return lang('upload_msg','upload_err_sys_1');
 				break;
 			case 2:
+				return lang('upload_msg','upload_err_sys_2');
+				break;
+			case 3:
+				return lang('upload_msg','upload_err_sys_3');
+				break;
+			case 4:
+				return lang('upload_msg','upload_err_sys_4');
+				break;
+			case 6:
+				return lang('upload_msg','upload_err_sys_6');		
+				break;
+			case 7:
+				return lang('upload_msg','upload_err_sys_7');
+				break;
+			case 8:
+				return lang('upload_msg','upload_err_sys_8');
+				break;
+			case 9:
+				return lang('upload_msg','upload_err_usr_9');
+				break;
+			case 10:
+				return lang('upload_msg','upload_err_usr_10');
+				break;
+			case 11:
+				return lang('upload_msg','upload_err_usr_11');
+				break;
+			case 12:
+				return lang('upload_msg','upload_err_usr_12');
 				break;
 			default:
+				return lang('upload_msg','upload_err_-999');
 		}
 	}
 	function delete_attachment($aid){

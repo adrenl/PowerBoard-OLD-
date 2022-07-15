@@ -26,12 +26,19 @@
 	max-width:100%;
 }
 .attachment{
+	display:inline-block;
+	padding:3px;
+	margin:3px;
 }
 .smallfont{
 	font-size:12px;
 }
 table{
 	border-collapse:collapse;
+}
+img{
+	margin:6px 0;
+	max-width:100%;
 }
 .code{
 	padding:2px 0 2px 5px;

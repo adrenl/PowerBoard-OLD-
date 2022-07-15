@@ -3,7 +3,7 @@
 <?php $thisforum=$thisarea['area'][$fid] ?>
 <a href="forums.php?mod=postdo&action=newtopic&arid=<?php echo $arid;?>&fid=<?php echo $fid;?>" class="ui-btn">发表主题</a>
 <ul data-role="listview">
-	<?php if(!@array_key_exists(1,$posts['p'])){ ?>
+	<?php if(!$posts){ ?>
 		<p class="center">没有数据</p>
 	<?php }else{ ?>
 		<?php if(is_array($posts['p'])){foreach($posts['p'] as $pid=>$post){ ?>

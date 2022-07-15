@@ -14,7 +14,8 @@
 	}
 	include libfile('functions/post');
 	$navtitle=$_G['config']['forums'][$arid]['name'].' - '.$_G['config']['forums'][$arid]['area'][$fid]['name'];
-	$index=@unserialize(file($dir.'index.php')[1]);
+	//$index=@unserialize(@file($dir.'index.php')[1]);
+	$index=@readindex($dir.'index.php');
 	for($i=$index['totaltopic'];$i>0;$i--){
 		$p=@getpost($arid,$fid,$i,1);
 		if($p==false) continue;

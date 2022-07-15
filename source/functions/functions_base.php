@@ -274,14 +274,18 @@
 		}
 	}
 	function sizecount($filesize){
-		if($filesize>=1073741824){
+		if($filesize>=1125899906842624){
+			$filesize=round($filesize/1125899906842624*100)/100 .' PB';
+		}elseif($filesize>=1099511627776){
+			$filesize=round($filesize/1099511627776*100)/100 .' TB';
+		}elseif($filesize>=1073741824){
 			$filesize=round($filesize/1073741824*100)/100 .' GB';
 		}elseif($filesize>=1048576){
 			$filesize=round($filesize/1048576*100)/100 .' MB';
 		}elseif($filesize>=1024){
 			$filesize=round($filesize/1024*100)/100 .' KB';
 		}else{
-			$filesize=$filesize.' Bytes';
+			$filesize=$filesize.' Bit';
 		}
 		return $filesize;
 	}
@@ -340,8 +344,12 @@
 		}
 	}
 	function readindex($file,$default=array()){
-		$return=@unserialize(file($file)[1]);
-		return $return?$return:$default;
+		if(!file_exists($file)){
+			return $default;
+		}else{
+			$return=@unserialize(@file($file)[1]);
+			return $return?$return:$default;
+		}
 	}
 	function writeindex($file,$data=array()){
 		return @file_put_contents($file,PHP_DIE."\n".@serialize($data));

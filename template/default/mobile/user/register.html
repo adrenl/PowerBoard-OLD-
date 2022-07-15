@@ -1,17 +1,10 @@
 {template common/header}
-<div class="div_father">
-	<div class="div_title">{la login}</div>
-	<div class="div_content">
-		<div class="formcenter">	
-			<form method="post" action="user.php?mod=register&submit=yes">
-				<label for="username"><i class="rq"></i>{la username}</label><input type="text" name="username" id="username" placeholder="{la len} {$_G['config']['user']['len']['name_min']}~{$_G['config']['user']['len']['name_max']}" required>
-				<label for="password"><i class="rq"></i>{la password}</label><input type="password" name="password" id="password" placeholder="{la len} {$_G['config']['user']['len']['password_min']}~{$_G['config']['user']['len']['password_max']}" required>
-				<label for="email"><i class="rq"></i>{la email}</label><input type="email" name="email" id="email" required>
-				<label for="secode"><i class="rq"></i>{la secode}</label> {subtemplate common/seccheck}
-				<input type="submit" class="submitbtn" value="{la login}">
-				<input type="reset" value="{la reset}">
-			</form>
-		</div>
-	</div>
-</div>
+<form method="post" action="user.php?mod=register&submit=yes">
+	<label for="username"><i class="rq"></i>{la username}</label><input type="text" name="username" id="username" placeholder="{la len} {$_G['config']['user']['len']['name_min']}~{$_G['config']['user']['len']['name_max']}" required>
+	<label for="password"><i class="rq"></i>{la password}</label><input type="password" name="password" id="password" placeholder="{la len} {$_G['config']['user']['len']['password_min']}~{$_G['config']['user']['len']['password_max']}" required>
+	<label for="email"><i class="rq"></i>{la email}</label><input type="email" name="email" id="email" required>
+	<label for="secode"><i class="rq"></i>{la secode}</label> {subtemplate common/seccheck}
+	<input type="submit" class="submitbtn" value="{la login}">
+	<input type="reset" value="{la reset}">
+</form>
 {template common/footer}

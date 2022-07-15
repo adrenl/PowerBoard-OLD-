@@ -11,9 +11,9 @@
 	<fieldset data-role="controlgroup" data-type="horizontal">
 		<label><input type="checkbox" name="disable_bbcode" value="1" {if $post['disable_bbcode']==1}checked{/if}>{la post_e_disable_bbcode}</label>
 		<label><input type="checkbox" name="disable_smilies" value="1" {if $post['disable_smilies']==1}checked{/if}>{la post_e_disable_smilies}</label>
+		{if $action=='editpost'}<label for="delete_post"><input type="checkbox" name="delete_post" id="delete_post" value="1">{la post_delete} ({la post_delete_msg})</label> {/if}
 	</fieldset>
 	{if $action!='newreply'}&nbsp;{la post_e_readlevel} <input type="number" name="readlevel" min="0" class="wnunberi" value="{$post['readlevel']}">{/if}
-	{if $action=='editpost'}<br><label for="delete_post"><input type="checkbox" name="delete_post" id="delete_post" value="1">{la post_delete} ({la post_delete_msg})</label> {/if}
 	{if $action=='newtopic' || $action=='newreply'}
 		<label for="secode">{la secode}</label>{subtemplate common/seccheck}<br>
 	{/if}
