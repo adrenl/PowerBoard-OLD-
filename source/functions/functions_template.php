@@ -15,15 +15,16 @@
 			$tplhtmlpath=str_replace($tplid,'default',$tplhtmlpath);
 			$tplhtmltemppath=str_replace($tplid,'default',$tplhtmltemppath);
 		}
-		if(IN_MOBILE){
+		if((defined('IN_MOBILE') && IN_MOBILE) || defined('IN_VIEW')){
 			$tplhtmlpath="{$tplpath}mobile/{$file}.html";
 			$tplhtmltemppath="data/cache/template/{$tplid}_m_".str_replace('/','_',$file).'.php';
 			if(!file_exists($tplhtmlpath)){
 				$tplhtmlpath="{$tplpath}{$file}.html";
+				$tplhtmltemppath="data/cache/template/{$tplid}_".str_replace('/','_',$file).'.php';
 			}
 		}
 		if(file_exists($tplhtmltemppath) && filemtime($tplhtmltemppath)==filemtime($tplhtmlpath)){
-			return $tplhtmltemppath;
+			//return $tplhtmltemppath;
 		}
 		$parse=file_get_contents($tplhtmlpath);
 		//Parse start
@@ -77,7 +78,7 @@
 		$tplcsspath="{$tplpath}css/{$cssname}.css";
 		$tplcsstemppath="data/cache/template/css_{$tplid}_{$cssname}.css";
 		if(file_exists($tplcsstemppath) && filemtime($tplcsstemppath)==filemtime($tplcsspath)){
-			return $tplcsstemppath;
+			//return $tplcsstemppath;
 		}
 		$parse=file_get_contents($tplcsspath);
 		//Parse start
@@ -87,6 +88,7 @@
 		//$parse=str_replace('{PAGE_FONTFAMILY}','"New SimSun","SimSun",Tahoma,Helvetica,"Microsoft Yahei",sans-serif',$parse);
 		//$parse=str_replace('{PAGE_FONTSIZE}','12px',$parse);
 		$parse=str_replace('{IMGDIR}',$_G['config']['bburl'].'files/imgs/common/',$parse);
+		$parse=str_replace('{FILESURL}',$_G['config']['bburl'].'files/',$parse);
 		$parse=str_replace('{BBURL}',$_G['config']['bburl'],$parse);
 		$parse=str_replace('{TPLPATH}',$_G['config']['bburl'].$tplpath,$parse);
 		$parse=str_replace(array("\r","\n","\t",'  ','    ','    ','	'),'',$parse);

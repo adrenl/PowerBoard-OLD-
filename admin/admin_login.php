@@ -1,0 +1,1 @@
+<?=$cplang['welcome_msg']?>

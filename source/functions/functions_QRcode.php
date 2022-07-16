@@ -1,5 +1,5 @@
 <?php
-if(!defined('IN_PB')) {
+if(!defined('IN_POWERBOARD')) {
 	exit('Access Denied');
 }
 define('QR_MODE_NUL', -1);

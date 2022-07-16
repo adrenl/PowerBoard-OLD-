@@ -1,0 +1,36 @@
+body{
+	font:12px "New SimSun","SimSun",Tahoma,Helvetica,"Microsoft Yahei",sans-serif;
+	color:#000000;
+	background-color:#9eb6d8;
+	min-width:700px;
+	margin:0;
+	padding:0;
+	display:flex;
+}
+.div_father {
+	border:1px solid #86b9d6;
+	margin:10px;
+}
+.div_title {
+	background-color:#a3cde4;
+	color:#FFFFFF;
+	font-weight:bold;
+	padding:3px;
+	border-bottom:1px solid #86b9d6;
+}
+.div_content {
+	padding:3px;
+	background-color:#FFF;
+}
+.menu{
+	width:160px;
+}
+.column_l{
+	flex:0 0 auto;
+	height:100%;
+	overflow-y:auto;
+}
+.column_r{
+	flex:1 1 auto;
+	padding:25px 40px;
+}

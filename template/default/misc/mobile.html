@@ -1,0 +1,17 @@
+{template common/header}
+<link rel="stylesheet" type="text/css" href="{css misc_mobile}">
+<div>
+	<div class="tipsbox center fleft">
+		{la mv_now}<br><br>
+		{la mv_scan}
+		<p>
+			<img src="{$QRfile}" alt="{$_G['config']['bbname']}" title="{$_G['config']['bbname']}">
+		</p>
+		{la mv_or_type_url}<br>
+		{$_G['config']['bburl']}
+	</div>
+	<div class="mob_phone fright">
+		<iframe src="misc.php?mod=mobile&view=true" id="mob_view">Your browser doesn't support iframe,the preview is not available.</iframe>
+	</div>
+</div>
+{template common/footer}

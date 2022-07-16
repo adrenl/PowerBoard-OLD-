@@ -1,2 +1,2 @@
 <?php die();?>
-a:8:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:15:"哈哈哈哈哈";s:7:"content";s:18:"啊啊哈哈哈哈";s:8:"sendtime";i:1657786065;s:9:"readlevel";s:0:"";s:14:"disable_bbcode";N;s:15:"disable_smilies";N;s:13:"useattachment";N;}
+a:8:{s:2:"by";s:9:"NewAdryKB";s:5:"title";s:15:"哈哈哈哈哈";s:7:"content";s:30:"{21}{21}{21}啊啊哈哈哈哈";s:8:"sendtime";i:1657786065;s:9:"readlevel";s:0:"";s:14:"disable_bbcode";N;s:15:"disable_smilies";N;s:13:"useattachment";N;}

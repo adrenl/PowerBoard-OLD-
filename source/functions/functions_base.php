@@ -273,6 +273,8 @@
 				return date($format,$timestamp);
 		}
 	}
+	function time_tran($timestamp){
+	}
 	function sizecount($filesize){
 		if($filesize>=1125899906842624){
 			$filesize=round($filesize/1125899906842624*100)/100 .' PB';

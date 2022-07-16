@@ -77,6 +77,11 @@
 		'newwindow'=>'新窗口打开',
 		'thedo'=>'操作',
 
+		'mobile_view'=>'手机版',
+		'mv_now'=>'立即使用手机进入论坛，获得快速上网体验',
+		'mv_scan'=>'扫描该二维码',
+		'mv_or_type_url'=>'或者输入该网址',
+
 		'forum_description'=>'板块描述',
 		'forum_nodata'=>'没有数据',
 		'avatar_your_avater'=>'你现在的头像',
