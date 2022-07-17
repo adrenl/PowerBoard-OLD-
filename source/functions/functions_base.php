@@ -171,8 +171,7 @@
 		}
 	}
 	function getuserprofile($username,$isuid=false){
-		$profile=file(getuserpath($username,$isuid).'/profile.php')[1];
-		return $profile?@unserialize($profile):false;
+		return readindex(getuserpath($username,$isuid).'/profile.php');
 	}
 	function getuserexists($username,$isuid=false){
 		return getuserpath($username,$isuid)?true:false;
@@ -195,6 +194,13 @@
 			return true;
 		}else{
 			return false;
+		}
+	}
+	function booleantostr($boolean){
+		if($boolean==true){
+			return 'true';
+		}else{
+			return 'false';
 		}
 	}
 	function submitcheck($secode){
@@ -273,19 +279,43 @@
 				return date($format,$timestamp);
 		}
 	}
-	function time_tran($timestamp){
+	function time_tran($timestamp,$format=0){
+		$lang=lang('base');
+		$now=time();
+		$diff=$now-$timestamp;
+		$return="";
+		if($diff<0){
+			$return=$lang['tran_will'];
+		}elseif($diff>=0 && $diff<=30){
+			$return=$lang['tran_justnow'];
+		}elseif($diff>30 && $diff<=60){
+			$return=str_replace('{SEC}',$diff,$lang['tran_secago']);
+		}elseif($diff>60 && $diff<=3540){
+			$return=str_replace('{MIN}',round($diff/60),$lang['tran_minuteago']);
+		}elseif($diff>3540 && $diff<=82800){
+			$return=str_replace('{HOUR}',round($diff/60/60,1),$lang['tran_hoursago']);
+		}elseif($diff>82800 && $diff<=172800){
+			$return=str_replace('{TIME}',_date(2,$timestamp),$lang['tran_yesterday']);
+		}elseif($diff>172800 && $diff<=259200){
+			$return=str_replace('{TIME}',_date(2,$timestamp),$lang['tran_thedaybeforeyesterday']);
+		}elseif($diff>259200 && $diff<=864000){
+			$return=str_replace('{DAY}',round($diff/60/60/24),$lang['tran_dayago']);
+		}else{
+			$return=_date($format,$timestamp);
+		}
+		return $return;
 	}
 	function sizecount($filesize){
 		if($filesize>=1125899906842624){
-			$filesize=round($filesize/1125899906842624*100)/100 .' PB';
+			$filesize=round($filesize/1125899906842624*100,0)/100 .' PB';
 		}elseif($filesize>=1099511627776){
-			$filesize=round($filesize/1099511627776*100)/100 .' TB';
+			$filesize=round($filesize/1099511627776*100,0)/100 .' TB';
 		}elseif($filesize>=1073741824){
-			$filesize=round($filesize/1073741824*100)/100 .' GB';
+			$filesize=round($filesize/1073741824*100,0)/100 .' GB';
 		}elseif($filesize>=1048576){
-			$filesize=round($filesize/1048576*100)/100 .' MB';
+			$filesize=round($filesize/1048576*100,0)/100 .' MB';
 		}elseif($filesize>=1024){
-			$filesize=round($filesize/1024*100)/100 .' KB';
+			$filesize=round($filesize/1024*100,0)/100 .' KB';
 		}else{
 			$filesize=$filesize.' Bit';
 		}
@@ -368,5 +398,19 @@
 			$aid=intval($aid);
 			return $index[$aid];
 		}
+	}
+	function getdirsize($dir){
+		$handle = opendir($dir);
+		while(false!==($FolderOrFile = readdir($handle))){
+			if($FolderOrFile != "." && $FolderOrFile != ".."){
+				if(is_dir("$dir/$FolderOrFile")){
+					$sizeResult += getdirsize("$dir/$FolderOrFile");
+				}else{
+					$sizeResult += filesize("$dir/$FolderOrFile");
+				}
+			}
+		}
+		closedir($handle);
+		return $sizeResult;
 	}
 ?>

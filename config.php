@@ -10,6 +10,10 @@
 	  'admin' => 'adrenl',
 	  'moderator' => 'adrenl',
 	  'admin_email' => 'adrenl1234@163.com',
+	  'close'=>array(
+	  	'isclose'=>false,
+		'why'=>'',
+	  ),
 	  'seo' => 
 	  array (
 		'keyword' => 'PHP,PowerBoard,文本论坛,论坛',
@@ -31,16 +35,17 @@
 		),
 		'sign' => 
 		array (
-		  'maxl' => 100,
+		  'max' => 100,
 		  'use_basic_bbcode' => true,
 		  'use_img_bbcode' => true,
 		),
-		'dont_use_name' => 
-		array (
-		  0 => 'admin',
-		  1 => 'adrenl',
-		),
+		'savekey' => '*NewAdryKB*',
 		'canregister' => true,
+		'once_email'=>true,
+		'censoremail'=>'',
+		'newbiespan'=>5,
+		'sendu2u'=>'',
+		'showbbrules'=>'',
 	  ),
 	  'mail' => 
 	  array (

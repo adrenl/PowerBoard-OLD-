@@ -5,7 +5,6 @@ body{
 	min-width:700px;
 	margin:0;
 	padding:0;
-	display:flex;
 }
 .div_father {
 	border:1px solid #86b9d6;
@@ -26,11 +25,30 @@ body{
 	width:160px;
 }
 .column_l{
-	flex:0 0 auto;
 	height:100%;
+	width:180px;;
 	overflow-y:auto;
+	float:left;
 }
 .column_r{
-	flex:1 1 auto;
-	padding:25px 40px;
+	float:right;
+	width:calc(100% - 180px);
+}
+.header{
+	background-color:#FFF;
+	width:100%;
+	padding:2px;
+}
+table.set{
+	width:100%;
+	border-collapse:collapse;
+}
+.set td{
+	padding:3px;
+}
+input[type=password],input[type=text]{
+	width:60%;
+}
+.c{
+	text-align:center;
 }

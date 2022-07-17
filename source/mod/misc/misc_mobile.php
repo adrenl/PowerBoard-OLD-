@@ -19,7 +19,6 @@
 		$content=preg_replace_callback('/<a .*?href="(.*?)".*?>/is',function($m){
 			return str_replace($m[1],"javascript:;",$m[0]);
 		},$content);
-		echo $content;
 		exit;
 	}else{
 		$navtitle=lang('common','mobile_view');
